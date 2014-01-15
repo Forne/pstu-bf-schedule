@@ -1,9 +1,9 @@
 <% title 'Группа ' + @group.name %>
 
 <div class="page-header">
-  <h3>Расписание группы <%= @group.name %> <small>с <%= l(@from, :format => '%e %b') %> по <%= l(@to, :format => '%e %b') %></small>
-  <% if @group.archive %><span class="label label-warning">Не обновляемая!</span><% end %>
-  <% if @session = true %><span class="label label-warning">Расписание на сессию</span><% end %> 
+  <h3>Расписание группы <%= @group.name %>
+    <small>с <%= l(@from, :format => '%e %b') %> по <%= l(@to, :format => '%e %b') %></small>
+    <% if @group.archive %><span class="label label-warning">Не обновляемая!</span><% end %>
   </h3> 
 </div>
 
@@ -22,7 +22,7 @@
               <td width="10%"><%= entity.start.strftime('%k:%M') %> - <%= entity.end.strftime('%k:%M') %></td>
               <td width="35%"><%= entity.subject.name %> <% if entity.entity_type %>(<abbr title="<%= entity.entity_type.name %>"><%= entity.entity_type.shot_name %></abbr>)<% end %></td>
               <td width="10%"><% if entity.auditorium %><%= entity.auditorium.name %><% end %></td>
-              <td width="35%"><%= link_to entity.teacher.full_name, { :controller => 'vk/teachers', :action => 'schedule', :id => entity.teacher.id } %></td>
+              <td width="35%"><%= link_to entity.teacher.full_name, { :controller => 'web/teachers', :action => 'schedule', :id => entity.teacher.id } %></td>
             </tr>
           <% end %>
         </tbody>

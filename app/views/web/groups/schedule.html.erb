@@ -1,9 +1,9 @@
 <% title 'Группа ' + @group.name %>
 
 <div class="page-header">
-  <h3>Расписание группы <%= @group.name %> <small>с <%= l(@from, :format => '%e %b') %> по <%= l(@to, :format => '%e %b') %></small>
-  <% if @group.archive %><span class="label label-warning">Не обновляемая!</span><% end %>
-  <% if @session = true %><span class="label label-warning">Расписание на сессию</span><% end %> 
+  <h3>Расписание группы <%= @group.name %>
+    <small>с <%= l(@from, :format => '%e %b') %> по <%= l(@to, :format => '%e %b') %></small>
+    <% if @group.archive %><span class="label label-warning">Не обновляемая!</span><% end %>
   </h3> 
 </div>
 
