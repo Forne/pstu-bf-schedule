@@ -19,10 +19,10 @@ namespace :bfpstu do
       logger.info "== Group:  #{group.name}"
       puts '== Group: ' + group.name
 
-      Entity.destroy_all(:group_id => group, :start => args[:from].to_datetime..args[:to].to_datetime)
-
       getparams = { :group => group.name, :from => args[:from], :to => args[:to] }
       body = fetch('http://srv.cravs.org/schlude/get_json.php', getparams )
+
+      Entity.destroy_all(:group_id => group, :start => args[:from].to_datetime..args[:to].to_datetime)
 
       body.each do |entity|
         if group.name == entity['group']

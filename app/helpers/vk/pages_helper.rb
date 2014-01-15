@@ -1,2 +1,0 @@
-module Vk::PagesHelper
-end

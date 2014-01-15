@@ -2,8 +2,10 @@ Schedule::Application.routes.draw do
   namespace :vk do
     root :to => 'pages#start'
 
-    get 'groups/:id/schedule', to: 'schedule#group'
-    get 'teachers/:id/schedule', to: 'schedule#teacher'
+    get 'groups', to: 'groups#index'
+    get 'groups/:id/schedule', to: 'groups#schedule'
+    get 'teachers', to: 'teachers#index'
+    get 'teachers/:id/schedule', to: 'teachers#schedule'
 
     get 'init', to: 'pages#init'
     get 'banned', to: 'pages#banned'
@@ -15,6 +17,7 @@ Schedule::Application.routes.draw do
 
   scope :module => 'web' do
     root :to => 'groups#index'
+
     get 'groups', to: 'groups#index'
     get 'groups/:id/schedule', to: 'groups#schedule'
     get 'teachers', to: 'teachers#index'

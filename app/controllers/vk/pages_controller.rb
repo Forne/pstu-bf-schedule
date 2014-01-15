@@ -20,7 +20,7 @@ class Vk::PagesController < Vk::ApplicationController
   def start
     if @user
       if @user.group
-        redirect_to :controller=>'vk/schedule', :action => 'group', :id => @user.group.id
+        redirect_to :controller=>'vk/groups', :action => 'schedule', :id => @user.group.id
       else
         flash[:notice] = 'Необходимо выбрать группу!'
         redirect_to :controller=>'vk/user', :action => 'edit'
