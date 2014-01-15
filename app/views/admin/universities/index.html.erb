@@ -1,0 +1,27 @@
+<h1>Listing universities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @universities.each do |university| %>
+      <tr>
+        <td><%= university.name %></td>
+        <td><%= link_to 'Show', [:admin, university] %></td>
+        <td><%= link_to 'Edit', edit_admin_university_path(university) %></td>
+        <td><%= link_to 'Destroy', [:admin, university], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New University', new_admin_university_path %>

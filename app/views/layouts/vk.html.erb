@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Расписание БФ ПНИПУ (ПГТУ)</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body> <div class="navbar navbar-fixed-top navbar-default">
+  <div class="container">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'Расписание', { :controller => 'vk/pages', :action => 'start' } %></li>
+        <% if @user %><li><%= link_to 'Изменение настроек', { :controller => 'vk/user', :action => 'edit' } %></li><% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <% if flash[:notice] %><div class="alert alert-info"><%= flash[:notice] %></div><% end %>
+  <%= yield %>
+</div>
+</body>
+<script src="//vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
+<script type="text/javascript">
+    VK.init(function() { VK.callMethod( "resizeWindow", 800, $('BODY').height()+100);
+    }, function() {}, '5.3');
+</script>
+</html>
