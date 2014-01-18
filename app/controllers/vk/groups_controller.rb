@@ -1,17 +1,10 @@
 class Vk::GroupsController < Vk::ApplicationController
   def index
-    @groups = Group.order(:name).all
-    if stale?(@groups, public: true)
-      @groups_by_year = Hash.new
-      @groups.map do |i|
-        (@groups_by_year[i.start_year] ||= []) << i
-      end
-      @groups_by_year = @groups_by_year.sort.reverse
-    end
+    @groups = Group.order(:name)
+    @groups_by_start_year = @groups.group_by(&:start_year)
   end
 
   def schedule
-    @gid = params[:id]
     if session? and !params.has_key?(:to)
       @session = true
       @from = Date.today
@@ -26,10 +19,7 @@ class Vk::GroupsController < Vk::ApplicationController
     @group = Group.find(params[:id])
     if stale?([@group, @from, @to], public: true)
       @schedule = Entity.order(:start).where(:group_id => @group, :start => @from..@to).includes(:teacher, :subject, :auditorium, :entity_type)
-      @rasp = Hash.new
-      @schedule.map do |i|
-        (@rasp[i.start.to_date] ||= []) << i
-      end
+      @schedule_by_date = @schedule.group_by(&:group_by_date)
     end
   end
 

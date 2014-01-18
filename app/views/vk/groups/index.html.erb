@@ -5,15 +5,15 @@
 </div>
 
 <% cache @groups do %>
-  <% @groups_by_year.each do |key, value| %>
-    <div class="panel panel-info">
-      <div class="panel-heading"><%= key %> год (<%= t('stat.group', :count => value.count) %>)</div>
-      <ul class="list-group">
-        <% value.each do |entity| %>
-          <li class="list-group-item"><%= link_to entity.name, { :controller => 'vk/groups', :action => 'schedule', :id => entity.id } %></li>
-        <% end %>
-      </ul>
-    </div>
+  <% @groups_by_start_year.each do |key, value| %>
+      <div class="panel panel-info">
+        <div class="panel-heading"><%= key %> год (<%= t('stat.group', :count => value.count) %>)</div>
+        <ul class="list-group">
+          <% value.each do |entity| %>
+            <li class="list-group-item"><%= link_to entity.name, { :controller => 'groups', :action => 'schedule', :id => entity.id } %></li>
+          <% end %>
+        </ul>
+      </div>
   <% end %>
 <% end %>
 
@@ -22,6 +22,5 @@
   <div class="panel-heading">Статистика</div>
   <div class="panel-body">
     <p>Всего <%= t('stat.group', :count => @groups.count) %></p>
-    <p>Render <%= l(DateTime.now, :format => '%e %b # %k:%M:%S') %></p>
   </div>
 </div>

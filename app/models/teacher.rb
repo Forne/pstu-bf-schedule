@@ -22,4 +22,8 @@ class Teacher < ActiveRecord::Base
   def middlename
   	full_name.split(" ")[2]
   end
+
+  def group_by_first_letter
+    full_name[0]
+  end
 end

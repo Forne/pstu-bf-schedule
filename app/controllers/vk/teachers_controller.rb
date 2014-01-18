@@ -1,12 +1,7 @@
 class Vk::TeachersController < Vk::ApplicationController
   def index
-    @teachers = Teacher.order(:full_name).all
-    if stale?(@teachers, public: true)
-        @teachers_by_abc = Hash.new
-        @teachers.map do |i|
-          (@teachers_by_abc[i.full_name[0]] ||= []) << i
-        end
-      end
+    @teachers = Teacher.order(:full_name)
+    @teachers_by_letter = @teachers.group_by(&:group_by_first_letter)
   end
 
   def schedule
@@ -24,10 +19,7 @@ class Vk::TeachersController < Vk::ApplicationController
     @teacher = Teacher.find(params[:id])
     if stale?([@teacher, @from, @to], public: true)
       @schedule = Entity.order(:start).where(:teacher_id => @teacher, :start => @from..@to).includes(:group, :subject, :auditorium, :entity_type)
-      @rasp = Hash.new
-      @schedule.map do |i|
-        (@rasp[i.start.to_date] ||= []) << i
-      end
+      @schedule_by_date = @schedule.group_by(&:group_by_date)
     end
   end
 
