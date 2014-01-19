@@ -23,6 +23,10 @@ class Web::TeachersController < Web::ApplicationController
     end
   end
 
+  def debug
+    @teacher = Teacher.find(params[:id])
+  end
+
   def session?
     if Date.today < DateTime.new(2014,02,01)
       return true
