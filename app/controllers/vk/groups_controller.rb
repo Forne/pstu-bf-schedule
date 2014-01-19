@@ -1,7 +1,7 @@
 class Vk::GroupsController < Vk::ApplicationController
   def index
     @groups = Group.order(:name)
-    @groups_by_start_year = @groups.group_by(&:start_year)
+    @groups_by_start_year = @groups.group_by(&:start_year).sort
   end
 
   def schedule
