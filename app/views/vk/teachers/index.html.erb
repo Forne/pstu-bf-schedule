@@ -10,7 +10,7 @@
       <div class="panel-heading">"<%= key %>"</div>
       <ul class="list-group">
         <% value.each do |entity| %>
-          <li class="list-group-item"><%= link_to entity.full_name, { :controller => 'teachers', :action => 'schedule', :id => entity.id } %></li>
+          <li class="list-group-item"><%= link_to entity.full_name, { :controller => 'vk/teachers', :action => 'schedule', :id => entity.id } %></li>
         <% end %>
       </ul>
     </div>

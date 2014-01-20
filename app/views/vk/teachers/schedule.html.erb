@@ -21,7 +21,7 @@
               <td width="10%"><%= entity.start.strftime('%k:%M') %> - <%= entity.end.strftime('%k:%M') %></td>
               <td width="35%"><%= entity.subject.name %> <% if entity.entity_type %>(<abbr title="<%= entity.entity_type.name %>"><%= entity.entity_type.shot_name %></abbr>)<% end %></td>
               <td width="10%"><% if entity.auditorium %><%= entity.auditorium.name %><% end %></td>
-              <td width="35%"><%= link_to entity.group.name, { :controller => 'groups', :action => 'schedule', :id => entity.group.id } %></td>
+              <td width="35%"><%= link_to entity.group.name, { :controller => 'vk/groups', :action => 'schedule', :id => entity.group.id } %></td>
             </tr>
           <% end %>
         </tbody>
