@@ -52,6 +52,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (4.7.5)
+    multi_fetch_fragments (0.0.17)
     multi_json (1.8.4)
     newrelic_rpm (3.7.1.182)
     petrovich (0.1.4)
@@ -112,6 +113,7 @@ DEPENDENCIES
   dalli
   jbuilder
   jquery-rails
+  multi_fetch_fragments
   newrelic_rpm
   petrovich
   pg

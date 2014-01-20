@@ -14,3 +14,4 @@ gem 'jbuilder'
 
 gem 'newrelic_rpm'
 gem 'petrovich'
+gem 'multi_fetch_fragments'

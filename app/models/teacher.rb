@@ -7,8 +7,6 @@ class Teacher < ActiveRecord::Base
 
   belongs_to :university
 
-  has_many :teacher_names
-
   validates :full_name, presence: true
 
   def firstname

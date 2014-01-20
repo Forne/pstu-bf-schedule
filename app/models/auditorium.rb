@@ -3,7 +3,5 @@ class Auditorium < ActiveRecord::Base
 
   belongs_to :university
 
-  has_many :auditorium_names
-
   validates :name, presence: true
 end
