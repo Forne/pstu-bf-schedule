@@ -5,18 +5,18 @@
 </div>
 
 <% cache @teachers do %>
-  <% @teachers_by_letter.each do |key, value| %>
-    <div class="panel panel-info">
-      <div class="panel-heading">"<%= key %>"</div>
-      <ul class="list-group">
-        <% value.each do |entity| %>
-          <li class="list-group-item"><%= link_to entity.full_name, { :controller => 'vk/teachers', :action => 'schedule', :id => entity.id } %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% @teachers_by_letter.each do |key, value| %>
+        <div class="panel panel-info">
+          <div class="panel-heading">"<%= key %>"</div>
+          <ul class="list-group">
+            <% value.each do |entity| %>
+                <li class="list-group-item"><%= link_to entity.full_name, {:controller => 'vk/teachers', :action => 'schedule', :id => entity.id} %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 <% end %>
-    
+
 <hr>
 <div class="panel panel-primary">
   <div class="panel-heading">Статистика</div>

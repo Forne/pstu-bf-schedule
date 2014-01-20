@@ -1,7 +1,7 @@
 class Vk::PagesController < Vk::ApplicationController
   def init
     if params.has_key?(:auth_key)
-      if (Digest::MD5.hexdigest('3893502_' + params[:viewer_id] + '_09zerWjvcxQN49H87GOC')) ==  params[:auth_key]
+      if (Digest::MD5.hexdigest('3893502_' + params[:viewer_id] + '_09zerWjvcxQN49H87GOC')) == params[:auth_key]
         vk_user = JSON.parse(params[:api_result])['response'][0]
         @user = User.where(:vk_id => params[:viewer_id]).first_or_create(:first_name => vk_user['first_name'], :last_name => vk_user['last_name'], :sex => vk_user['sex'])
         # TODO: update user info
@@ -20,13 +20,13 @@ class Vk::PagesController < Vk::ApplicationController
   def start
     if @user
       if @user.group
-        redirect_to :controller=>'vk/groups', :action => 'schedule', :id => @user.group.id
+        redirect_to :controller => 'vk/groups', :action => 'schedule', :id => @user.group.id
       else
         flash[:notice] = 'Необходимо выбрать группу!'
-        redirect_to :controller=>'vk/user', :action => 'edit'
+        redirect_to :controller => 'vk/user', :action => 'edit'
       end
     else
-      redirect_to :controller=>'vk/pages', :action => 'wrong_auth'
+      redirect_to :controller => 'vk/pages', :action => 'wrong_auth'
     end
   end
 

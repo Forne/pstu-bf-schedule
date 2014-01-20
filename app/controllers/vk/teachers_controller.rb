@@ -18,13 +18,13 @@ class Vk::TeachersController < Vk::ApplicationController
     end
     @teacher = Teacher.find(params[:id])
     if stale?([@teacher, @from, @to], public: true)
-      @schedule = Entity.order(:start).where(:teacher_id => @teacher, :start => @from..@to).includes(:group, :subject, :auditorium, :entity_type)
+      @schedule = Entity.order(:start).where(:teacher_id => @teacher, :start => @from..@to).eager_load(:group, :subject, :auditorium, :entity_type)
       @schedule_by_date = @schedule.group_by(&:group_by_date)
     end
   end
 
   def session?
-    if Date.today < DateTime.new(2014,02,01)
+    if Date.today < DateTime.new(2014, 02, 01)
       return true
     else
       return false

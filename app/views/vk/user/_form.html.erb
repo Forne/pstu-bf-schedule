@@ -1,7 +1,7 @@
-<%= form_for(@user, :url => 'update', :html => { :method => :put }) do |f| %>
+<%= form_for(@user, :url => 'update', :html => {:method => :put}) do |f| %>
     <div class="form-group">
       <%= f.label :group_id, 'Ваша группа' %>
-      <%= f.collection_select(:group_id, Group.all.order("name ASC"), :id, :name, {}, { :class => 'form-control' } ) %>
+      <%= f.collection_select(:group_id, Group.all.order("name ASC"), :id, :name, {}, {:class => 'form-control'}) %>
     </div>
 
     <%= f.submit(:value => 'Обновить', :class => 'btn') %>
