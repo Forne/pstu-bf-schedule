@@ -4,7 +4,7 @@
   <h3>Список преподавателей</h3>
 </div>
 
-<% cache @teachers do %>
+<% cache do %>
   <% @teachers_by_letter.each do |key, value| %>
     <div class="panel panel-info">
       <div class="panel-heading">"<%= key %>"</div>
