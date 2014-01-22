@@ -1,0 +1,34 @@
+doctype
+html
+  head
+    meta content="text/html; charset=utf-8" http-equiv="content-type"
+    title = yield(:title)
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+  body
+    .navbar.navbar-fixed-top.navbar-default
+      .container
+        .navbar-header
+          button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          = link_to 'Расписание', {:controller => 'groups', :action => 'index'}, :class => 'navbar-brand'
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li = link_to 'Список групп', { :controller => 'groups', :action => 'index' }
+            li = link_to 'Список преподавателей', { :controller => 'teachers', :action => 'index' }
+          ul.nav.navbar-nav.navbar-right
+            li
+              a href="http://vk.com/app3893502" Приложение Вконтакте
+        /! /.nav-collapse
+    .container
+      - if flash[:notice]
+        .alert.alert-info= flash[:notice]
+      = yield
+    hr
+      footer
+        p.text-center
+          | Created by <a href="mailto:forne@cravs.com">Forne</a>.
+          |  Parsed from <a href="http://raspisanie.bf.pstu.ru/">bf.pstu.ru</a>.
+  = javascript_include_tag 'application'

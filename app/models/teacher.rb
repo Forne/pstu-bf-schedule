@@ -10,15 +10,15 @@ class Teacher < ActiveRecord::Base
   validates :full_name, presence: true
 
   def firstname
-    full_name.split(" ")[1]
+    self.full_name.split(" ")[1]
   end
 
   def lastname
-    full_name.split(" ")[0]
+    self.full_name.split(" ")[0]
   end
 
   def middlename
-    full_name.split(" ")[2]
+    self.full_name.split(" ")[2]
   end
 
   def group_by_first_letter

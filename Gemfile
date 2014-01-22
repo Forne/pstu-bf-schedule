@@ -11,6 +11,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 
 gem 'jbuilder'
+gem 'slim-rails'
 
 gem 'petrovich'
 gem 'multi_fetch_fragments'
