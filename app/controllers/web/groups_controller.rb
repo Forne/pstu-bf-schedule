@@ -20,7 +20,6 @@ class Web::GroupsController < Web::ApplicationController
     if stale?([@group, @from, @to], public: true)
       @schedule = Entity.order(:start).where(:group_id => @group, :start => @from..@to).eager_load(:teacher, :subject, :auditorium, :entity_type)
       @schedule_by_date = @schedule.group_by(&:group_by_date)
-      sleep 5
     end
   end
 
