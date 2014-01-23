@@ -2,7 +2,6 @@ class Web::GroupsController < Web::ApplicationController
   def index
     @groups = Group.order(:name)
     @groups_by_start_year = @groups.group_by(&:start_year).sort
-    expires_in 3.hours, :public => true, 'max-stale' => 0
   end
 
   def schedule
@@ -21,8 +20,8 @@ class Web::GroupsController < Web::ApplicationController
     if stale?([@group, @from, @to], public: true)
       @schedule = Entity.order(:start).where(:group_id => @group, :start => @from..@to).eager_load(:teacher, :subject, :auditorium, :entity_type)
       @schedule_by_date = @schedule.group_by(&:group_by_date)
+      sleep 5
     end
-    expires_in 1.hours, :public => true, 'max-stale' => 0
   end
 
   def session?
