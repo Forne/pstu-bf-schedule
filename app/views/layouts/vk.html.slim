@@ -4,6 +4,7 @@ html
     meta content="text/html; charset=utf-8" http-equiv="Content-Type"
     title = yield(:title)
     = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
     = csrf_meta_tags
   body
     .navbar.navbar-fixed-top.navbar-default
@@ -23,11 +24,10 @@ html
       footer
         p.text-center
           | Created by Forne. <a href="http://schedule.cravs.com/" target="_blank">Перейти на сайт</a>
-  = javascript_include_tag 'application'
-  | <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
-    <script type="text/javascript">
-        VK.init(function () {
-            VK.callMethod("resizeWindow", 800, $('BODY').height() + 100);
-        }, function () {
-        }, '5.3');
-    </script>
+    | <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+      <script type="text/javascript">
+          VK.init(function () {
+              VK.callMethod("resizeWindow", 800, $('BODY').height() + 100);
+          }, function () {
+          }, '5.3');
+      </script>
