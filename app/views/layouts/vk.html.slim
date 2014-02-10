@@ -25,8 +25,7 @@ html
   | <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
     <script type="text/javascript">
         VK.init(function () {
-            VK.callMethod("resizeWindow", 800, $(document).height() + 100);
+            VK.callMethod("resizeWindow", 800, $('body').height() + 100);
         }, function () {
         }, '5.3');
-        alert( $('body').height() );
     </script>
