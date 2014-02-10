@@ -9,4 +9,4 @@
         |  год (#{t('stat.group', :count => value.count)})
       ul.list-group
         - value.each do |entity|
-          li.list-group-item= link_to entity.name, { :controller=>'vk#groups', :action=>'schedule', :id=>(entity.id) }
+          li.list-group-item= link_to entity.name, { :controller=>'groups', :action=>'schedule', :id=>(entity.id) }
