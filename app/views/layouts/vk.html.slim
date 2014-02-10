@@ -1,0 +1,33 @@
+doctype
+html
+  head
+    meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+    title = yield(:title)
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+  body
+    .navbar.navbar-fixed-top.navbar-default
+      .container
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li = link_to 'Ваше расписание', { :controller => 'pages', :action => 'start' }
+            li = link_to 'Список групп', { :controller => 'groups', :action => 'index' }
+          ul.nav.navbar-nav.navbar-right
+            li
+              li = link_to 'Изменение настроек', { :controller => 'user', :action => 'edit' }
+    .container
+      - if flash[:notice]
+        .alert.alert-info= flash[:notice]
+      = yield
+    hr
+      footer
+        p.text-center
+          | Created by Forne. <a href="http://schedule.cravs.com/" target="_blank">Перейти на сайт</a>
+  = javascript_include_tag 'application'
+  | <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+    <script type="text/javascript">
+        VK.init(function () {
+            VK.callMethod("resizeWindow", 800, $('BODY').height() + 100);
+        }, function () {
+        }, '5.3');
+    </script>

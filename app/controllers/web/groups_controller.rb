@@ -1,6 +1,6 @@
 class Web::GroupsController < Web::ApplicationController
   def index
-    @groups = Group.order(:name)
+    @groups = Group.order(:name).where(archive: false)
     @groups_by_start_year = @groups.group_by(&:start_year).sort
   end
 
@@ -18,7 +18,7 @@ class Web::GroupsController < Web::ApplicationController
     end
     @group = Group.find(params[:id])
     if stale?([@group, @from, @to], public: true)
-      @schedule = Entity.order(:start).where(:group_id => @group, :start => @from..@to).eager_load(:teacher, :subject, :auditorium, :entity_type)
+      @schedule = Entity.order(:start).where(group_id: @group, start: @from..@to).eager_load(:teacher, :subject, :auditorium, :entity_type)
       @schedule_by_date = @schedule.group_by(&:group_by_date)
     end
   end
