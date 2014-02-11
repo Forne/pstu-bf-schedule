@@ -26,8 +26,11 @@ html
       - if flash[:notice]
         .alert.alert-info= flash[:notice]
       = yield
+
     hr
-      footer
-        p.text-center
-          | Created by <a href="mailto:forne@cravs.com">Forne</a>. Parsed from <a href="http://raspisanie.bf.pstu.ru/">bf.pstu.ru</a>.
-  = javascript_include_tag 'application'
+
+    footer
+      p.text-center
+        | Created by <a href="mailto:forne@cravs.com">Forne</a>. Parsed from <a href="http://raspisanie.bf.pstu.ru/">bf.pstu.ru</a>.
+
+    = javascript_include_tag 'application'

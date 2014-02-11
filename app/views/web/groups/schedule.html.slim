@@ -20,16 +20,16 @@
       tbody
       - value.each do |entity|
         tr
-          td width="10%"
+          td style="width:10%;"
             | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
-          td width="35%"
+          td style="width:35%;"
             = entity.subject.name
             - if entity.entity_type
               |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
-          td width="10%"
+          td style="width:10%;"
             - if entity.auditorium
               = entity.auditorium.name
-          td width="35%"
+          td style="width:35%;"
             = link_to entity.teacher.full_name, {:controller => 'teachers', :action => 'schedule', :id => entity.teacher.id}
 
 hr
