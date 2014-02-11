@@ -1,0 +1,11 @@
+title 'Список преподавателей'
+.page-header
+  h3 Список преподавателей
+
+- @teachers_by_letter.each do |key, value|
+  .panel.panel-info
+    .panel-heading
+      = key
+    ul.list-group
+      - value.each do |entity|
+        li.list-group-item= link_to entity.full_name, { :controller=>'teachers', :action=>'schedule', :id=>(entity.id) }

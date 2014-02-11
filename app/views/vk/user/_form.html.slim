@@ -1,0 +1,6 @@
+= form_for(@user, :url => 'update', :html => {:method => :put}) do |f|
+  .form-group
+    = f.label :group_id, 'Ваша группа'
+    = f.collection_select(:group_id, Group.order(:name).where(archive: false), :id, :name, {}, {:class => 'form-control'})
+
+  = f.submit(:value => 'Сохранить', :class => 'btn')

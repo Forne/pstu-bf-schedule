@@ -1,0 +1,41 @@
+- title 'Группа ' + @group.name
+
+.page-header
+  h3
+    | Расписание группы #{@group.name}
+    small  с #{l(@from, :format => '%e %b')} по #{l(@to, :format => '%e %b')}
+    - if @group.archive
+      | &nbsp;
+      span class="label label-warning" Не обновляемая!
+
+- @schedule_by_date.each do |key, value|
+  .panel.panel-info
+    .panel-heading
+      = l(key.to_date, :format => '%A, %e %b')
+      |  (#{ t('stat.pair', :count => value.count) })
+      - if key.to_date == Date.today
+        | &nbsp;
+        span class="label label-warning" Сегодня
+    table class="table"
+      tbody
+      - value.each do |entity|
+        tr
+          td width="10%"
+            | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
+          td width="35%"
+            = entity.subject.name
+            - if entity.entity_type
+              |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
+          td width="10%"
+            - if entity.auditorium
+              = entity.auditorium.name
+          td width="35%"
+            = link_to entity.teacher.full_name, {:controller => 'teachers', :action => 'schedule', :id => entity.teacher.id}
+
+hr
+
+.panel.panel-primary
+  .panel-heading Статистика
+  .panel-body
+    - if @group.updated_at?
+      p Расписание синхронизировано #{ time_ago_in_words(@group.updated_at) } назад.

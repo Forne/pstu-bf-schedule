@@ -2,7 +2,6 @@ class Vk::TeachersController < Vk::ApplicationController
   def index
     @teachers = Teacher.order(:full_name)
     @teachers_by_letter = @teachers.group_by(&:group_by_first_letter)
-    expires_in 3.hours, :public => true, 'max-stale' => 0
   end
 
   def schedule
@@ -22,7 +21,6 @@ class Vk::TeachersController < Vk::ApplicationController
       @schedule = Entity.order(:start).where(teacher_id: @teacher, start: @from..@to).eager_load(:group, :subject, :auditorium, :entity_type)
       @schedule_by_date = @schedule.group_by(&:group_by_date)
     end
-    expires_in 1.hours, :public => true, 'max-stale' => 0
   end
 
   def session?
