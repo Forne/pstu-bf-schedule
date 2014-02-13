@@ -1,8 +1,10 @@
 doctype html
-html
+html lang="ru"
   head
-    meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+    meta content="text/html; charset=utf-8"
     title = yield(:title)
+    meta name="description" content="Неофициальное расписание БФ ПНИПУ"
+    meta name="keywords" content="расписание, университет, пгту, пнипу, бф, березниковский филиал"
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
 
@@ -10,7 +12,7 @@ html
     .navbar.navbar-fixed-top.navbar-default
       .container
         .navbar-header
-          button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button"
+          button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"
             span.icon-bar
             span.icon-bar
             span.icon-bar
