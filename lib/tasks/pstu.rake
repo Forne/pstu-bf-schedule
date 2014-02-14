@@ -93,11 +93,6 @@ namespace :bfpstu do
       puts "== Total imported: #{i}"
     end
   end
-
-  desc 'Auto Import'
-  task :autoimport do
-    Rake::Task[bfpstu:import].invoke(Date.today, Date.today+30.days)
-  end
 end
 
 def fetch(url, params)
