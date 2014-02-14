@@ -14,6 +14,7 @@ gem 'slim-rails'
 
 gem 'petrovich'
 gem 'multi_fetch_fragments'
+gem 'whenever'
 
 group :production do
   gem 'puma'
