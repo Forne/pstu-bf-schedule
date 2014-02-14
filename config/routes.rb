@@ -22,6 +22,5 @@ Schedule::Application.routes.draw do
     get 'groups/:id/schedule', to: 'groups#schedule'
     get 'teachers', to: 'teachers#index'
     get 'teachers/:id/schedule', to: 'teachers#schedule'
-    get 'teachers/:id/debug', to: 'teachers#debug'
   end
 end

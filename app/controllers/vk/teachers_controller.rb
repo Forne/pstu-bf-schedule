@@ -1,7 +1,6 @@
 class Vk::TeachersController < Vk::ApplicationController
   def index
     @teachers = Teacher.order(:full_name)
-    @teachers_by_letter = @teachers.group_by(&:group_by_first_letter)
   end
 
   def schedule
@@ -19,7 +18,6 @@ class Vk::TeachersController < Vk::ApplicationController
     @teacher = Teacher.find(params[:id])
     if stale?([@teacher, @from, @to], public: true)
       @schedule = Entity.order(:start).where(teacher_id: @teacher, start: @from..@to).eager_load(:group, :subject, :auditorium, :entity_type)
-      @schedule_by_date = @schedule.group_by(&:group_by_date)
     end
   end
 
