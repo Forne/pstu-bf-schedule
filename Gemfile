@@ -16,6 +16,7 @@ gem 'petrovich'
 gem 'multi_fetch_fragments'
 
 group :production do
+  gem 'puma'
   gem 'newrelic_rpm'
   gem 'dalli'
 end
