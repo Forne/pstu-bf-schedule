@@ -5,6 +5,7 @@ require 'net/http'
 namespace :bfpstu do
   desc 'Import'
   task :import, [:from, :to]  => :environment  do |t, args|
+    args.with_defaults(:from => Time.now.strftime("%d.%m.%Y"), :to => (Time.now+30.days).strftime("%d.%m.%Y"))
     logger = Logger.new('log/import_bfpstu.log')
 
     logger.info "== Import all groups from #{args[:from]} to #{args[:to]}"
@@ -20,7 +21,7 @@ namespace :bfpstu do
       puts '== Group: ' + group.name
 
       getparams = { :group => group.name, :from => args[:from], :to => args[:to] }
-      body = fetch('http://srv.cravs.org/schlude/get_json.php', getparams )
+      body = fetch('http://srv-php.l.cravs.com/bfpstu-schedule-parser/get_json.php', getparams )
 
       Entity.destroy_all(:group_id => group, :start => args[:from].to_datetime..args[:to].to_datetime)
 
@@ -38,20 +39,16 @@ namespace :bfpstu do
           end
 
           # Entity type
-          entitytype = case entity['type']
-            when "Л" then EntityType.find(2)
-            when "ПЗ" then EntityType.find(3)
-            when "Л/Р" then EntityType.find(4)
-            when "Зач." then EntityType.find(5)
-            when "К/Р" then EntityType.find(6)
-            when "Тест" then EntityType.find(7)
-            when "К/П" then EntityType.find(8)
-            when "Экз" then EntityType.find(9)
-            when "Конс" then EntityType.find(10)
-            else
-              logger.info "= Unknown type (#{entity['type']})"
-              puts "= Unknown type (#{entity['type']})"
-           end
+          entitytype = EntityType.find_by(shot_name: entity['type'])
+          if entitytype.blank?
+            entitytype = EntityType.create(
+                name: entity['type'],
+                shot_name: entity['type'],
+                important: false
+            )
+            logger.info "= Create type (#{entitytype.name})"
+            puts "= Create type (#{entitytype.name})"
+          end
 
           # Subject find
           subject = university.subjects.find_by(shot_name: entity['subject'])
@@ -99,7 +96,7 @@ def fetch(url, params)
   uri = URI(url)
   uri.query = URI.encode_www_form(params)
   #puts 'Fetch: ' + uri.to_s
-  data = res = Net::HTTP.get_response(uri).body
+  data = Net::HTTP.get_response(uri).body
   JSON.parse(data)
 end
 
