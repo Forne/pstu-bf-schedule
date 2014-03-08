@@ -1,4 +1,4 @@
-class Vk::ApplicationController < ApplicationController
+class Vk::ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   layout 'vk'

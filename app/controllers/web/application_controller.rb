@@ -1,4 +1,4 @@
-class Web::ApplicationController < ApplicationController
+class Web::ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   layout 'web'
