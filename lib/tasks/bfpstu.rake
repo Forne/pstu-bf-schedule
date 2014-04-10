@@ -11,9 +11,8 @@ namespace :bfpstu do
     logger.info "== Import all groups from #{args[:from]} to #{args[:to]}"
     puts "== Import all groups from #{args[:from]} to #{args[:to]}"
 
-    university = University.find_or_create_by_name('БФ ПНИПУ')
+    university = University.find_or_create_by(name: 'БФ ПНИПУ')
     groups = university.groups.where(archive: false)
-    #groups = Group.find_all_by_name('АТП-08в')
     groups.each do |group|
       i = 0
 
