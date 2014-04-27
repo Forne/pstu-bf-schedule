@@ -21,7 +21,7 @@ namespace :bfpstu do
 
       getparams = { :group => group.name, :from => args[:from], :to => args[:to] }
       body = fetch('http://srv-php.l.cravs.com/bfpstu-schedule-parser/get_json.php', getparams )
-      if body['error'].present?
+      if body.first['error'].present?
         puts body['error']
         next
       end
