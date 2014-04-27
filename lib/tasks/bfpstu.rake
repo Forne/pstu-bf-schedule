@@ -21,7 +21,11 @@ namespace :bfpstu do
 
       getparams = { :group => group.name, :from => args[:from], :to => args[:to] }
       body = fetch('http://srv-php.l.cravs.com/bfpstu-schedule-parser/get_json.php', getparams )
-      next if body['error'].present?
+      if body['error'].present?
+        puts body['error']
+        next
+      end
+
       Entity.destroy_all(:group_id => group, :start => args[:from].to_datetime..args[:to].to_datetime)
 
       body.each do |entity|
