@@ -19,6 +19,7 @@ gem 'whenever'
 group :production do
   gem 'newrelic_rpm'
   gem 'dalli'
+  gem 'therubyracer'
 end
 
 gem 'rack-mini-profiler', :groups => [:development]
