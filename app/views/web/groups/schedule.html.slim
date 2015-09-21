@@ -6,7 +6,7 @@
     small  с #{l(@from, :format => '%e %b')} по #{l(@to, :format => '%e %b')}
     - if @group.archive
       | &nbsp;
-      span class="label label-warning" Не обновляемая!
+      span class="label label-warning" Информация данной группы не обновляется!
 
 - cache("web/groups/schedule-#{@group}") do
   - @schedule.group_by(&:group_by_date).each do |key, value|

@@ -3,11 +3,10 @@
 .page-header
   h3 Список преподавателей
 
-- cache("web/teachers/index-#{Group.count}")
-  - @teachers.group_by(&:group_by_first_letter).each do |key, value|
-    .panel.panel-info
-      .panel-heading
-        = key
-      ul.list-group
-        - value.each do |entity|
-          li.list-group-item= link_to entity.full_name, { :controller=>'teachers', :action=>'schedule', :id=>(entity.id) }
+- @teachers.group_by(&:group_by_first_letter).each do |key, value|
+  .panel.panel-info
+    .panel-heading
+      = key
+    ul.list-group
+      - value.each do |entity|
+        li.list-group-item= link_to entity.full_name, { :controller=>'teachers', :action=>'schedule', :id=>(entity.id) }

@@ -3,12 +3,11 @@
 .page-header
   h3 Список групп
 
-- cache("vk/groups/index-#{Group.count}")
-  - @groups.group_by(&:start_year).sort.each do |key, value|
-    .panel.panel-info
-      .panel-heading
-        = key
-        |  год (#{t('stat.group', :count => value.count)})
-      ul.list-group
-        - value.each do |entity|
-          li.list-group-item= link_to entity.name, { :controller=>'groups', :action=>'schedule', :id=>(entity.id) }
+- @groups.group_by(&:start_year).sort.each do |key, value|
+  .panel.panel-info
+    .panel-heading
+      = key
+      |  год (#{t('stat.group', :count => value.count)})
+    ul.list-group
+      - value.each do |entity|
+        li.list-group-item= link_to entity.name, { :controller=>'groups', :action=>'schedule', :id=>(entity.id) }

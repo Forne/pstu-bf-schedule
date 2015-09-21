@@ -29,12 +29,3 @@
                 = entity.auditorium.name
             td style="width:35%;"
               = link_to entity.group.name, {:controller => 'groups', :action => 'schedule', :id => entity.group.id}
-
-hr
-
-.panel.panel-primary
-  .panel-heading Статистика
-  .panel-body
-    p Расписание сгенерировано на основе студенческого расписания!
-    - if @teacher.updated_at?
-      p Расписание синхронизировано #{ time_ago_in_words(@teacher.updated_at) } назад.
