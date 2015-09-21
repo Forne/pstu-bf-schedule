@@ -24,7 +24,7 @@ RUN bundle install
 
 # Add app
 ADD ./ ./
-RUN bundle exec rake assets:precompile
+RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 # Schedule gem init
 RUN bundle exec whenever
