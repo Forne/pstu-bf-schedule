@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.1'
+gem 'rails', '~> 4.2.4'
 
 gem 'pg'
 
@@ -17,9 +17,9 @@ gem 'multi_fetch_fragments'
 gem 'whenever'
 
 group :production do
-  #gem 'puma'
   gem 'newrelic_rpm'
   gem 'dalli'
 end
+
 gem 'rack-mini-profiler', :groups => [:development]
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
