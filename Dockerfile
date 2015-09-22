@@ -27,4 +27,4 @@ ADD ./ ./
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 # Schedule gem init
-RUN bundle exec whenever
+RUN bundle exec whenever --update-crontab schedule
