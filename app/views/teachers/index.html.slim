@@ -3,10 +3,11 @@
 .page-header
   h3 Список преподавателей
 
-- @teachers.group_by(&:group_by_first_letter).sort.each do |key, value|
-  .panel.panel-info
-    .panel-heading
-      = key
-    ul.list-group
-      - value.each do |entity|
-        li.list-group-item= link_to entity.full_name, teacher_path(entity)
+- cache(@teachers.count) do
+  - @teachers.group_by(&:group_by_first_letter).sort.each do |key, value|
+    .panel.panel-info
+      .panel-heading
+        = key
+      ul.list-group
+        - value.each do |entity|
+          li.list-group-item= link_to entity.full_name, teacher_path(entity)
