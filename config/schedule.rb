@@ -3,5 +3,5 @@ every 12.hours do
 end
 
 every 3.days do
-  rake sitemap:refresh
+  rake 'sitemap:refresh'
 end
