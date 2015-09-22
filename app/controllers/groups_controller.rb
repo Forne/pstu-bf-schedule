@@ -12,8 +12,6 @@ class GroupsController < ApplicationController
       @to = Date.today+10.days
     end
     @group = Group.find(params[:id])
-    if stale?([@group, @from, @to], public: true)
-      @schedule = Entity.order(:start).where(group_id: @group, start: @from..@to).eager_load(:teacher, :subject, :auditorium, :entity_type)
-    end
+    @schedule = Entity.eager_load(:teacher, :subject, :auditorium, :entity_type).where(group_id: @group, start: @from..@to).order(:start)
   end
 end
