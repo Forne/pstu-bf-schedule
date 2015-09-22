@@ -1,4 +1,4 @@
-SitemapGenerator::Sitemap.default_host = 'http://show.cravs.com'
+SitemapGenerator::Sitemap.default_host = 'http://schedule.cravs.com'
 
 SitemapGenerator::Sitemap.create do
   add groups_path, :priority => 1, :changefreq => 'daily'
