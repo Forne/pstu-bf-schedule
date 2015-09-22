@@ -24,6 +24,7 @@ RUN bundle install
 
 # Add app
 ADD ./ ./
+RUN chown -R app:app ./tmp ./log
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 # Schedule gem init
