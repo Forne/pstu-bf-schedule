@@ -15,6 +15,7 @@ gem 'slim-rails'
 gem 'petrovich'
 gem 'multi_fetch_fragments'
 gem 'whenever'
+gem 'sitemap_generator'
 
 group :production do
   gem 'newrelic_rpm'

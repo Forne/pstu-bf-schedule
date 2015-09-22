@@ -1,9 +1,9 @@
-class Vk::TeachersController < Vk::ApplicationController
+class TeachersController < ApplicationController
   def index
     @teachers = Teacher.order(:full_name)
   end
 
-  def schedule
+  def show
     if session? and !params.has_key?(:to)
       @session = true
       @from = Date.today

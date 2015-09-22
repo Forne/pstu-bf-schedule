@@ -1,4 +1,4 @@
-class Vk::UserController < Vk::ApplicationController
+class UserController < ApplicationController
   before_filter :need_auth
 
   def edit
@@ -6,9 +6,9 @@ class Vk::UserController < Vk::ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      redirect_to :controller => 'vk/pages', :action => 'start'
+      redirect_to :controller => 'pages', :action => 'start'
     else
-      render action: 'vk/user/edit'
+      render action: 'user/edit'
     end
   end
 

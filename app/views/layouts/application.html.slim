@@ -11,19 +11,26 @@ html lang="ru"
   body
     .navbar.navbar-fixed-top.navbar-default
       .container
-        .navbar-header
-          button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          = link_to 'Расписание', {:controller => 'groups', :action => 'index'}, :class => 'navbar-brand'
+        - if @user.nil?
+          .navbar-header
+            button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            = link_to 'Расписание', {:controller => 'groups', :action => 'index'}, :class => 'navbar-brand'
         .collapse.navbar-collapse
           ul.nav.navbar-nav
+            - if @user
+              li = link_to 'Ваше расписание', { :controller => 'pages', :action => 'start' }
             li = link_to 'Список групп', { :controller => 'groups', :action => 'index' }
             li = link_to 'Список преподавателей', { :controller => 'teachers', :action => 'index' }
           ul.nav.navbar-nav.navbar-right
-            li
-              a href="http://vk.com/app3893502" Приложение Вконтакте
+            - if @user
+              li = link_to 'Изменение настроек', { :controller => 'user', :action => 'edit' }
+            - else
+              li
+                a href="http://vk.com/app3893502" Приложение Вконтакте
+
     .container
       - if flash[:notice]
         .alert.alert-info= flash[:notice]
@@ -33,9 +40,17 @@ html lang="ru"
 
     footer
       p.text-center
-        | Created by <a href="mailto:forne@cravs.com">Forne</a>. Parsed from <a href="http://raspisanie.bf.pstu.ru/">bf.pstu.ru</a>.
+        | Created by Forne
 
     = javascript_include_tag 'application'
+    - if @user
+      | <script src="//vk.com/js/api/xd_connection.js?2"></script>
+        <script>
+            VK.init(function () {
+                VK.callMethod("resizeWindow", 800, $('body').height() + 100);
+            }, function () {
+            }, '5.3');
+        </script>
     | <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

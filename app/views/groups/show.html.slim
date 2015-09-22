@@ -8,11 +8,11 @@
       | &nbsp;
       span class="label label-warning" Информация данной группы не обновляется!
 
-- cache("web/groups/schedule-#{@group}") do
+- cache(@group) do
   - @schedule.group_by(&:group_by_date).each do |key, value|
     .panel.panel-info
       .panel-heading
-        = l(key.to_date, :format => '%A, %e %b')
+        = l(key.to_date, :format => '%A, %e %b %Y')
         |  (#{ t('stat.pair', :count => value.count) })
         - if key.to_date == Date.today
           | &nbsp;
@@ -25,13 +25,14 @@
               | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
             td style="width:35%;"
               = entity.subject.name
-              - if entity.entity_type
-                |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
+              - if entity.entity_type.present?
+                - if entity.entity_type.name.present?
+                  |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
             td style="width:10%;"
               - if entity.auditorium
                 = entity.auditorium.name
             td style="width:35%;"
-              = link_to entity.teacher.full_name, {:controller => 'teachers', :action => 'schedule', :id => entity.teacher.id}
+              = link_to entity.teacher.full_name, teacher_path(entity.teacher)
 
 hr
 

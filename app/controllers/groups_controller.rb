@@ -1,9 +1,9 @@
-class Web::TeachersController < Web::ApplicationController
+class GroupsController < ApplicationController
   def index
-    @teachers = Teacher.order(:full_name)
+    @groups = Group.order(:name).where(archive: false)
   end
 
-  def schedule
+  def show
     if session? and !params.has_key?(:to)
       @session = true
       @from = Date.today
@@ -15,9 +15,9 @@ class Web::TeachersController < Web::ApplicationController
       @from = Date.today
       @to = Date.today+10.days
     end
-    @teacher = Teacher.find(params[:id])
-    if stale?([@teacher, @from, @to], public: true)
-      @schedule = Entity.order(:start).where(teacher_id: @teacher, start: @from..@to).eager_load(:group, :subject, :auditorium, :entity_type)
+    @group = Group.find(params[:id])
+    if stale?([@group, @from, @to], public: true)
+      @schedule = Entity.order(:start).where(group_id: @group, start: @from..@to).eager_load(:teacher, :subject, :auditorium, :entity_type)
     end
   end
 

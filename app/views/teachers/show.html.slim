@@ -1,14 +1,11 @@
-- title 'Группа ' + @group.name
+- title 'Преподаватель ' + @teacher.full_name
 
 .page-header
   h3
-    | Расписание группы #{@group.name}
+    | Расписание #{@teacher.lastname_genitive} #{@teacher.firstname_genitive} #{@teacher.middlename_genitive}
     small  с #{l(@from, :format => '%e %b')} по #{l(@to, :format => '%e %b')}
-    - if @group.archive
-      | &nbsp;
-      span class="label label-warning" Информация данной группы не обновляется!
 
-- cache("vk/groups/schedule-#{@group}") do
+- cache(@teacher) do
   - @schedule.group_by(&:group_by_date).each do |key, value|
     .panel.panel-info
       .panel-heading
@@ -31,12 +28,4 @@
               - if entity.auditorium
                 = entity.auditorium.name
             td style="width:35%;"
-              = link_to entity.teacher.full_name, {:controller => 'teachers', :action => 'schedule', :id => entity.teacher.id}
-
-hr
-
-.panel.panel-primary
-  .panel-heading Статистика
-  .panel-body
-    - if @group.updated_at?
-      p Расписание синхронизировано #{ time_ago_in_words(@group.updated_at) } назад.
+              = link_to entity.group.name, group_path(entity.group)

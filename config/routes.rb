@@ -1,26 +1,14 @@
 Schedule::Application.routes.draw do
-  namespace :vk do
-    root :to => 'pages#start'
+  root :to => 'groups#index'
 
-    get 'groups', to: 'groups#index'
-    get 'groups/:id/schedule', to: 'groups#schedule'
-    get 'teachers', to: 'teachers#index'
-    get 'teachers/:id/schedule', to: 'teachers#schedule'
+  resources :groups, only: [:index, :show]
+  resources :teachers, only: [:index, :show]
 
-    get 'init', to: 'pages#init'
-    get 'banned', to: 'pages#banned'
-    get 'wrong_auth', to: 'pages#wrong_auth'
+  get 'start', to: 'pages#start'
+  get 'vk_init', to: 'pages#vk_init'
+  get 'banned', to: 'pages#banned'
+  get 'wrong_auth', to: 'pages#wrong_auth'
 
-    get 'user/edit'
-    put 'user/update'
-  end
-
-  scope :module => 'web' do
-    root :to => 'groups#index'
-
-    get 'groups', to: 'groups#index'
-    get 'groups/:id/schedule', to: 'groups#schedule'
-    get 'teachers', to: 'teachers#index'
-    get 'teachers/:id/schedule', to: 'teachers#schedule'
-  end
+  get 'user/edit'
+  put 'user/update'
 end
