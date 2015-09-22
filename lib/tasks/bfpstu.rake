@@ -20,7 +20,7 @@ namespace :bfpstu do
       puts '== Group: ' + group.name
 
       getparams = { :group => group.name, :from => args[:from], :to => args[:to] }
-      body = fetch('http://srv-php.l.cravs.com/bfpstu-show-parser/get_json.php', getparams )
+      body = fetch('http://srv-php.l.cravs.com/bfpstu-schedule-parser/get_json.php', getparams )
       if body.first['error'].present?
         puts body.first['error']
       end
