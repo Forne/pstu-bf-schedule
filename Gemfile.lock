@@ -169,6 +169,7 @@ DEPENDENCIES
   sitemap_generator
   slim-rails
   therubyracer
+  tilt
   tzinfo-data
   uglifier
   whenever

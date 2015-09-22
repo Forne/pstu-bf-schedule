@@ -8,6 +8,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
+gem 'tilt'
 
 gem 'jbuilder'
 gem 'slim-rails'
