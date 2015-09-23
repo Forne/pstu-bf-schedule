@@ -1,18 +1,18 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
   database: schedule_dev
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: schedule_test
 
 production:
-  adapter: postgresql
-  encoding: unicode
   database: <%= ENV['DB_NAME'] %>
-  pool: 5
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASS'] %>
   host: <%= ENV['DB_HOST'] %>
