@@ -6,6 +6,10 @@ json.schedule @schedule do |event|
   json.end event.end
   json.subject event.subject, :id, :name
   json.type event.entity_type, :id, :name
-  json.teacher event.teacher, :id, :full_name
-  json.auditorium event.auditorium, :id, :name
+  if event.teacher
+    json.teacher event.teacher, :id, :full_name
+  end
+  if event.auditorium
+    json.auditorium event.auditorium, :id, :name, :shot_name
+  end  
 end

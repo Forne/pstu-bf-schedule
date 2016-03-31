@@ -1,3 +1,3 @@
 json.array!(@groups) do |group|
-  json.extract! group, :id, :name
+  json.extract! group, :university_id, :id, :name, :archive
 end
