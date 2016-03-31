@@ -1,31 +1,36 @@
-- title 'Преподаватель ' + @teacher.full_name
+- if I18n.locale == :ru
+  - title t('.title', :teacher => @teacher.lastname_genitive + ' ' + @teacher.firstname_genitive + ' ' + @teacher.middlename_genitive)
+- else
+  - title t('.title', :teacher => I18n.transliterate(@teacher.full_name, :locale => :ru))
 
 .page-header
   h3
-    | Расписание #{@teacher.lastname_genitive} #{@teacher.firstname_genitive} #{@teacher.middlename_genitive}
-    small  с #{l(@from, :format => '%e %b')} по #{l(@to, :format => '%e %b')}
+    - if I18n.locale == :ru
+      = t('.title', :teacher => @teacher.lastname_genitive + ' ' + @teacher.firstname_genitive + ' ' + @teacher.middlename_genitive)
+    - else
+      = t('.title', :teacher => I18n.transliterate(@teacher.full_name, :locale => :ru))
+    small = t('.subtitle', :from => l(@from, :format => :long), :to => l(@to, :format => :long))
 
-- cache(@teacher) do
-  - @schedule.group_by(&:group_by_date).each do |key, value|
-    .panel.panel-info
-      .panel-heading
-        = l(key.to_date, :format => '%A, %e %b')
-        |  (#{ t('stat.pair', :count => value.count) })
-        - if key.to_date == Date.today
-          | &nbsp;
-          span class="label label-warning" Сегодня
-      table class="table"
-        tbody
-        - value.each do |entity|
-          tr
-            td style="width:10%;"
-              | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
-            td style="width:35%;"
-              = entity.subject.name
-              - if entity.entity_type
-                |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
-            td style="width:10%;"
-              - if entity.auditorium
-                = entity.auditorium.name
-            td style="width:35%;"
-              = link_to entity.group.name, group_path(entity.group)
+- @schedule.group_by(&:group_by_date).each do |key, value|
+  .panel.panel-info
+    .panel-heading
+      = l(key.to_date, :format => '%A, %e %b %Y')
+      |  (#{ t('.pair', :count => value.count) })
+      - if key.to_date == Date.today
+        | &nbsp;
+        span class="label label-warning" = t('.today')
+    table class="table"
+      tbody
+      - value.each do |entity|
+        tr
+          td style="width:10%;"
+            | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
+          td style="width:35%;"
+            = entity.subject.name
+            - if entity.entity_type.name.present?
+              |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
+          td style="width:10%;"
+            - if entity.auditorium
+              = entity.auditorium.name
+          td style="width:35%;"
+            = link_to entity.group.name, group_path(entity.group)

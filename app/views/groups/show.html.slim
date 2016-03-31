@@ -1,25 +1,39 @@
-- title 'Группа ' + @group.name
+- title t('.title', :group => @group.name)
 
 .page-header
   h3
-    | Расписание группы #{@group.name}
-    small  с #{l(@from, :format => '%e %b')} по #{l(@to, :format => '%e %b')}
+    = t('.title', :group => @group.name)
+    small = t('.subtitle', :from => l(@from, :format => :long), :to => l(@to, :format => :long))
     - if @group.archive
       | &nbsp;
-      span class="label label-warning" Информация данной группы не обновляется!
+      span class="label label-warning" = t('.archive_notification')
 
-- cache(@group) do
-  - @schedule.group_by(&:group_by_date).each do |key, value|
-    .panel.panel-info
-      .panel-heading
-        = l(key.to_date, :format => '%A, %e %b %Y')
-        |  (#{ t('stat.pair', :count => value.count) })
-        - if key.to_date == Date.today
-          | &nbsp;
-          span class="label label-warning" Сегодня
-      table class="table"
-        tbody
-        - value.each do |entity|
+- @schedule.group_by(&:group_by_date).each do |key, value|
+  .panel.panel-info
+    .panel-heading
+      = l(key.to_date, :format => '%A, %e %b %Y')
+      |  (#{ t('.pair', :count => value.count) })
+      - if key.to_date == Date.today
+        | &nbsp;
+        span class="label label-warning" = t('.today')
+    table class="table"
+      tbody
+      - value.each do |entity|
+        - if entity.entity_type.important
+          tr class="warning"
+            td style="width:10%;"
+              | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
+            td style="width:35%;"
+              = entity.subject.name
+              - if entity.entity_type.present?
+                - if entity.entity_type.name.present?
+                  |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
+            td style="width:10%;"
+              - if entity.auditorium
+                = entity.auditorium.name
+            td style="width:35%;"
+              = link_to entity.teacher.full_name, teacher_path(entity.teacher)
+        - else
           tr
             td style="width:10%;"
               | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
@@ -37,7 +51,7 @@
 hr
 
 .panel.panel-primary
-  .panel-heading Статистика
+  .panel-heading = t('.stat')
   .panel-body
     - if @group.updated_at?
-      p Расписание синхронизировано #{ time_ago_in_words(@group.updated_at) } назад.
+      p = t('.syncago', :sync => time_ago_in_words(@group.updated_at))

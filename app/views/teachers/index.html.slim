@@ -1,7 +1,7 @@
-- title 'Список преподавателей'
+- title t('.title')
 
 .page-header
-  h3 Список преподавателей
+  h3 = t('.title')
 
 - @teachers.group_by(&:group_by_first_letter).sort.each do |key, value|
   .panel.panel-info
@@ -9,4 +9,4 @@
       = key
     ul.list-group
       - value.each do |entity|
-        li.list-group-item= link_to entity.full_name, teacher_path(entity)
+          li.list-group-item= link_to entity.full_name, teacher_path(entity)

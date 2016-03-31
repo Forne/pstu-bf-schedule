@@ -1,13 +1,20 @@
-- title 'Список групп'
+- title t('.title')
 
 .page-header
-  h3 Список групп
+  h3 = t('.title')
 
 - @groups.group_by(&:start_year).sort().reverse.each do |key, value|
-  .panel.panel-info
-    .panel-heading
-      = key
-      |  год (#{t('stat.group', :count => value.count)})
-    ul.list-group
-      - value.each do |entity|
-        li.list-group-item= link_to entity.name, group_path(entity)
+  - if I18n.locale == :ru
+    .panel.panel-info
+      .panel-heading
+        = t('.group_header', :key => key, :count => t('.group', :count => value.count))
+      ul.list-group
+        - value.each do |entity|
+          li.list-group-item= link_to entity.name, group_path(entity)
+  - else
+    .panel.panel-info
+      .panel-heading
+        = t('.group_header', :key => key, :count => t('.group', :count => value.count))
+      ul.list-group
+        - value.each do |entity|
+          li.list-group-item= link_to entity.name, group_path(entity)

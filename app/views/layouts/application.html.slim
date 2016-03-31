@@ -3,33 +3,34 @@ html lang="ru"
   head
     meta content="text/html; charset=utf-8" http-equiv="content-type"
     title = yield(:title)
-    meta name="description" content="Неофициальное расписание БФ ПНИПУ"
-    meta name="keywords" content="расписание, университет, пгту, пнипу, бф, березниковский филиал"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    meta name="description" content=t('.description')
+    meta name="keywords" content=t('.keywords')
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tags
 
   body
     .navbar.navbar-fixed-top.navbar-default
       .container
-        - if @user.nil?
-          .navbar-header
-            button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            = link_to 'Расписание', {:controller => 'groups', :action => 'index'}, :class => 'navbar-brand'
+        .navbar-header
+          button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          - if @user
+            = link_to t('.menu.schedule'), { :controller => 'pages', :action => 'start' }, :class => 'navbar-brand'
+          - else
+            = link_to t('.menu.schedule'), {:controller => 'groups', :action => 'index'}, :class => 'navbar-brand'
         .collapse.navbar-collapse
-          ul.nav.navbar-nav
-            - if @user
-              li = link_to 'Ваше расписание', { :controller => 'pages', :action => 'start' }
-            li = link_to 'Список групп', { :controller => 'groups', :action => 'index' }
-            li = link_to 'Список преподавателей', { :controller => 'teachers', :action => 'index' }
+          ul.nav.navbar-nav            
+            li = link_to t('.menu.groups'), { :controller => 'groups', :action => 'index' }
+            li = link_to t('.menu.teachers'), { :controller => 'teachers', :action => 'index' }
           ul.nav.navbar-nav.navbar-right
             - if @user
-              li = link_to 'Изменение настроек', { :controller => 'user', :action => 'edit' }
+              li = link_to t('.menu.settings'), { :controller => 'user', :action => 'edit' }
             - else
               li
-                a href="http://vk.com/app3893502" Приложение Вконтакте
+                a href="http://vk.com/app3893502" = t('.menu.app')
 
     .container
       - if flash[:notice]
@@ -40,7 +41,7 @@ html lang="ru"
 
     footer
       p.text-center
-        | Created by Forne
+        | Created by <a href="http://vk.com/forne">Forne</a>
 
     = javascript_include_tag 'application'
     - if @user
