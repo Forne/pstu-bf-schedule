@@ -1,0 +1,12 @@
+- title t('.title', :group => @group.name)
+- description t('.description', :group => @group.name)
+
+.page-header
+  h3 = t('.title', :group => @group.name)
+
+.panel.panel-info
+  .panel-heading
+    = t('.header')
+  ul.list-group
+    - @users.sort().each do |entity|
+      li.list-group-item = link_to entity.first_name + ' ' + entity.last_name, 'http://vk.com/id'+entity.vk_id.to_s

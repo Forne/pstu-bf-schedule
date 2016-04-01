@@ -55,6 +55,10 @@ ru:
   user:
     edit:
       title: Изменение настроек
+  users:
+    index:
+      title: 'Студенты %{group}'
+      header: Список студентов
   date:
     abbr_day_names:
     - Вс
