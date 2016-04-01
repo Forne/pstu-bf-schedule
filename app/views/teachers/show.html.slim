@@ -1,7 +1,9 @@
 - if I18n.locale == :ru
   - title t('.title', :teacher => @teacher.lastname_genitive + ' ' + @teacher.firstname_genitive + ' ' + @teacher.middlename_genitive)
+  - description t('.description', :teacher =>  @teacher.lastname_genitive + ' ' + @teacher.firstname_genitive + ' ' + @teacher.middlename_genitive)
 - else
   - title t('.title', :teacher => I18n.transliterate(@teacher.full_name, :locale => :ru))
+  - description t('.description', :teacher => I18n.transliterate(@teacher.full_name, :locale => :ru))
 
 .page-header
   h3

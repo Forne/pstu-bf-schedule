@@ -12,12 +12,14 @@ en:
  groups:
    index:
      title: List of groups
+     description: Просмотр списка учебных групп БФ ПНИПУ и их расписание занятий.
      group_header: '%{key} year (%{count})'
      group:
        one: 1 group
        other: '%{count} groups'
    show:
      title: 'Schedule for %{group}'
+     description: 'Просмотр расписания занятий группы %{group} БФ ПНИПУ.'
      subtitle: ' from %{from} to %{to}'
      stat: Statistics
      syncago: 'Schedule sync %{sync} ago.'
@@ -29,11 +31,13 @@ en:
  teachers:
    index:
      title: List of teachers
+     description: Просмотр списка преподавателей БФ ПНИПУ и их расписание занятий.
      teacher:
        one: 1 teacher
        other: '%{count} teachers'
    show:
      title: 'Schedule for %{teacher}'
+     description: 'Просмотр расписания занятий %{teacher} в БФ ПНИПУ.'
      subtitle: ' from %{from} to %{to}'
      today: Today
      pair:

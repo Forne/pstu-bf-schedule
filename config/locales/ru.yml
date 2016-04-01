@@ -1,4 +1,5 @@
 ru:
+  title: Расписание БФ ПНИПУ
   layouts:
     application:
       description: Расписание БФ ПНИПУ
@@ -12,6 +13,7 @@ ru:
   groups:
     index:
       title: Список групп
+      description: Просмотр списка учебных групп БФ ПНИПУ и их расписание занятий.
       group_header: '%{key} год (%{count})'
       group:
         one: 1 группа
@@ -20,6 +22,7 @@ ru:
         other: '%{count} группы'
     show:
       title: 'Расписание группы %{group}'
+      description: 'Просмотр расписания занятий группы %{group} БФ ПНИПУ.'
       subtitle: ' с %{from} по %{to}'
       stat: Статистика
       syncago: 'Расписание синхронизировано %{sync} назад.'
@@ -33,6 +36,7 @@ ru:
   teachers:
     index:
       title: Список преподавателей
+      description: Просмотр списка преподавателей БФ ПНИПУ и их расписание занятий.
       teacher:
         one: 1 преподаватель
         few: '%{count} преподавателя'
@@ -40,6 +44,7 @@ ru:
         other: '%{count} преподавателя'
     show:
       title: 'Расписание %{teacher}'
+      description: 'Просмотр расписания занятий %{teacher} в БФ ПНИПУ.'
       subtitle: ' с %{from} по %{to}'
       today: Сегодня
       pair:
