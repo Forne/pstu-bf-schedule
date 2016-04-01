@@ -8,45 +8,48 @@
       | &nbsp;
       span class="label label-warning" = t('.archive_notification')
 
-- @schedule.group_by(&:group_by_date).each do |key, value|
-  .panel.panel-info
-    .panel-heading
-      = l(key.to_date, :format => '%A, %e %b %Y')
-      |  (#{ t('.pair', :count => value.count) })
-      - if key.to_date == Date.today
-        | &nbsp;
-        span class="label label-warning" = t('.today')
-    table class="table"
-      tbody
-      - value.each do |entity|
-        - if entity.entity_type.important
-          tr class="warning"
-            td style="width:10%;"
-              | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
-            td style="width:35%;"
-              = entity.subject.name
-              - if entity.entity_type.present?
-                - if entity.entity_type.name.present?
-                  |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
-            td style="width:10%;"
-              - if entity.auditorium
-                = entity.auditorium.name
-            td style="width:35%;"
-              = link_to entity.teacher.full_name, teacher_path(entity.teacher)
-        - else
-          tr
-            td style="width:10%;"
-              | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
-            td style="width:35%;"
-              = entity.subject.name
-              - if entity.entity_type.present?
-                - if entity.entity_type.name.present?
-                  |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
-            td style="width:10%;"
-              - if entity.auditorium
-                = entity.auditorium.name
-            td style="width:35%;"
-              = link_to entity.teacher.full_name, teacher_path(entity.teacher)
+- if @schedule.any?
+  - @schedule.group_by(&:group_by_date).each do |key, value|
+    .panel.panel-info
+      .panel-heading
+        = l(key.to_date, :format => '%A, %e %b %Y')
+        |  (#{ t('.pair', :count => value.count) })
+        - if key.to_date == Date.today
+          | &nbsp;
+          span class="label label-warning" = t('.today')
+      table class="table"
+        tbody
+        - value.each do |entity|
+          - if entity.entity_type.important
+            tr class="warning"
+              td style="width:10%;"
+                | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
+              td style="width:35%;"
+                = entity.subject.name
+                - if entity.entity_type.present?
+                  - if entity.entity_type.name.present?
+                    |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
+              td style="width:10%;"
+                - if entity.auditorium
+                  = entity.auditorium.name
+              td style="width:35%;"
+                = link_to entity.teacher.full_name, teacher_path(entity.teacher)
+          - else
+            tr
+              td style="width:10%;"
+                | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
+              td style="width:35%;"
+                = entity.subject.name
+                - if entity.entity_type.present?
+                  - if entity.entity_type.name.present?
+                    |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
+              td style="width:10%;"
+                - if entity.auditorium
+                  = entity.auditorium.name
+              td style="width:35%;"
+                = link_to entity.teacher.full_name, teacher_path(entity.teacher)
+- else
+  .alert.alert-info Расписание отсутствует!
 
 hr
 
