@@ -15,17 +15,14 @@
 
 - if @schedule.any?
   - @schedule.group_by(&:group_by_date).each do |key, value|
-    .panel.panel-info
+    .panel class=(key.to_date == Date.today ? 'panel-primary' : 'panel-info')
       .panel-heading
         = l(key.to_date, :format => '%A, %e %b %Y')
         |  (#{ t('.pair', :count => value.count) })
-        - if key.to_date == Date.today
-          | &nbsp;
-          span class="label label-warning" = t('.today')
       table class="table"
         tbody
         - value.each do |entity|
-          tr
+          tr class=(entity.entity_type.important ? 'warning' : '')
             td style="width:10%;"
               | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
             td style="width:35%;"
