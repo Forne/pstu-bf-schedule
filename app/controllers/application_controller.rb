@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
     I18n.locale = extract_locale_from_params || extract_locale_from_session || I18n.default_locale
   end
 
-  private
   def extract_locale_from_session
     parsed_locale = session[:locale]
     I18n.available_locales.include?(parsed_locale.to_sym) ? parsed_locale : nil if parsed_locale.present?
