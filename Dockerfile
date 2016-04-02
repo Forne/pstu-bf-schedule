@@ -5,7 +5,6 @@ MAINTAINER Dmitriy Pervin "theforner@gmail.com"
 ENV HOME /root
 CMD ["/sbin/my_init"]
 RUN rm -f /etc/service/nginx/down
-RUN rm -f /etc/service/memcached/down
 RUN ruby-switch --set ruby2.2
 
 # Config nginx
