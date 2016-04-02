@@ -13,4 +13,8 @@ module ApplicationHelper
   def description(page_description)
     content_for :description, page_description.to_s
   end
+
+  def manifest(page_manifest)
+    content_for :manifest, page_manifest.to_s
+  end
 end
