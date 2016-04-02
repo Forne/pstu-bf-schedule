@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = extract_locale_from_params || extract_locale_from_session || I18n.default_locale
+    I18n.locale = extract_locale_from_params || extract_locale_from_env || I18n.default_locale
   end
 
   def extract_locale_from_session
@@ -32,6 +32,13 @@ class ApplicationController < ActionController::Base
   def extract_locale_from_header
     if request.env['HTTP_ACCEPT_LANGUAGE'].present?
       parsed_locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      I18n.available_locales.include?(parsed_locale.to_sym) ? parsed_locale : nil
+    end
+  end
+
+  def extract_locale_from_env
+    if ENV['LOCALE'].present?
+      parsed_locale = ENV['LOCALE']
       I18n.available_locales.include?(parsed_locale.to_sym) ? parsed_locale : nil
     end
   end
