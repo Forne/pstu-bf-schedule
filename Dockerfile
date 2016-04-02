@@ -26,7 +26,6 @@ RUN bundle install
 ADD ./ ./
 RUN chown -R app:app ./tmp ./log
 RUN RAILS_ENV=production bundle exec rake assets:precompile
-RUN RAILS_ENV=production bundle exec rake sitemap:create
 
 # Schedule gem init
 RUN bundle exec whenever --update-crontab schedule
