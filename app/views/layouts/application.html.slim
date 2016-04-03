@@ -77,7 +77,13 @@ html lang="ru"
 
     = javascript_include_tag 'application'
     - if @user_ls != 'vk'
-      script src="/app.js"
+      | <script>if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js?3').then(function(reg) {
+                //console.log('Registration succeeded. Scope is ' + reg.scope);
+            }).catch(function(error) {
+                console.log('Registration failed with ' + error);
+            });
+        };</script>
     - if @user_ls == 'vk'
       | <script src="//vk.com/js/api/xd_connection.js?2"></script>
         <script>
