@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_filter :need_auth
+  before_filter :set_user, :need_auth
 
   def edit
   end

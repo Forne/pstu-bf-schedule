@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root :to => 'groups#index'
+  root :to => 'pages#start'
 
   resources :groups, only: [:index, :show] do
     resources :users, only: [:index]
@@ -8,8 +8,8 @@ Rails.application.routes.draw do
 
   get 'start', to: 'pages#start'
   get 'vk_init', to: 'pages#vk_init'
-  get 'banned', to: 'pages#banned'
-  get 'wrong_auth', to: 'pages#wrong_auth'
+  get '/auth/:provider/callback', to: 'pages#callback'
+  get 'logout', to: 'pages#logout'
 
   get 'user/edit'
   put 'user/update'

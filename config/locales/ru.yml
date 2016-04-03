@@ -8,8 +8,27 @@ ru:
         schedule: Расписание
         groups: Список групп
         teachers: Список преподавателей
-        settings: Изменение настроек
         app: Приложение Вконтакте
+        yet: Вы
+        settings: Изменение настроек
+        logout: Выйти
+  _shared:
+    schedule:
+      today: Сегодня
+      pair:
+        one: 1 пара
+        few: '%{count} пары'
+        many: '%{count} пар'
+        other: '%{count} пары'
+  pages:
+    start:
+      title: Главная
+      description: Здесь вы можете узнать свое расписание, либо расписание преподавателей БФ ПНИПУ.
+      hello: '%{great}, %{name}!'
+      schedule: 'Недельное расписание для группы %{group}'
+      groups: Группы
+      teachers: Преподаватели
+      vk: ВКонтакте
   groups:
     index:
       title: Список групп
@@ -26,13 +45,7 @@ ru:
       subtitle: ' с %{from} по %{to}'
       stat: Статистика
       syncago: 'Расписание синхронизировано %{sync} назад.'
-      today: Сегодня
       archive_notification: Информация данной группы не обновляется!
-      pair:
-        one: 1 пара
-        few: '%{count} пары'
-        many: '%{count} пар'
-        other: '%{count} пары'
   teachers:
     index:
       title: Список преподавателей
@@ -46,12 +59,6 @@ ru:
       title: 'Расписание %{teacher}'
       description: 'Просмотр расписания занятий %{teacher} в БФ ПНИПУ.'
       subtitle: ' с %{from} по %{to}'
-      today: Сегодня
-      pair:
-        one: 1 пара
-        few: '%{count} пары'
-        many: '%{count} пар'
-        other: '%{count} пары'
   user:
     edit:
       title: Изменение настроек

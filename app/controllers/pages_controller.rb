@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_action :set_user
+
   def vk_init
     if params.has_key?(:auth_key)
       if (Digest::MD5.hexdigest('3893502_' + params[:viewer_id] + '_09zerWjvcxQN49H87GOC')) == params[:auth_key]
@@ -6,33 +8,48 @@ class PagesController < ApplicationController
         @user = User.where(:vk_id => params[:viewer_id]).first_or_create(:first_name => vk_user['first_name'], :last_name => vk_user['last_name'], :sex => vk_user['sex'])
         # TODO: update user info
         session[:user_id] = @user.id
-        start
+        redirect_to :controller => 'pages', :action => 'start'
       else
-        flash[:notice] = 'Ошибка API Вконтакте! Ошибка проверки.'
+        flash[:notice] = 'Ошибка API Вконтакте: Проверка не удалась.'
         redirect_to :controller => 'pages', :action => 'start'
       end
     else
-      flash[:notice] = 'Ошибка API Вконтакте! Отсутствуют параметры.'
+      flash[:notice] = 'Ошибка API Вконтакте: Отсутствуют параметры.'
+      redirect_to :controller => 'pages', :action => 'start'
+    end
+  end
+
+  def callback
+    if auth_hash['info']
+      vk_user = auth_hash['info']
+      @user = User.where(:vk_id => auth_hash['uid']).first_or_create(:first_name => vk_user['first_name'], :last_name => vk_user['last_name'], :sex => auth_hash['extra']['raw_info']['sex'])
+      #flash[:notice] = vk_user['first_name'] + vk_user['last_name'] + auth_hash['extra']['raw_info']['sex'].to_s
+      session[:user_id] = @user.id
+      redirect_to :controller => 'pages', :action => 'start'
+    else
+      flash[:notice] = 'Что-то пошло не так! :('
       redirect_to :controller => 'pages', :action => 'start'
     end
   end
 
   def start
     if @user
-      if @user.group
-        redirect_to group_path(@user.group)
-      else
-        flash[:notice] = 'Необходимо выбрать группу!'
-        redirect_to :controller => 'user', :action => 'edit'
+      if @user.group_id
+        @from = Date.today
+        @to = Date.today+10.days
+        @schedule = Entity.eager_load(:teacher, :subject, :auditorium, :entity_type).where(group_id: @user.group_id, start: @from..@to).order(:start)
       end
-    else
-      redirect_to :controller => 'pages', :action => 'wrong_auth'
     end
   end
 
-  def banned
+  def logout
+    session[:user_id] = nil
+    redirect_to :controller => 'pages', :action => 'start'
   end
 
-  def wrong_auth
+  protected
+
+  def auth_hash
+    request.env['omniauth.auth']
   end
 end

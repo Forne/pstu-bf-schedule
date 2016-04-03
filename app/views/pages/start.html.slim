@@ -1,0 +1,28 @@
+- title t('.title')
+- description t('.description')
+
+- if @user
+  .page-header
+    h3 = t('.hello', :great => greet, :name => @user.first_name)
+  - if @user.group_id
+    div
+      //.alert.alert-info = t('.schedule', :group => @user.group.name)
+      = render '_shared/schedule'
+  - else
+    div
+      p Для дальнейшей работы, пожалуйста, укажите вашу группу!
+      = render 'user/form'
+- else
+  .page-header
+    h1 Добро пожаловать!
+  div class="jumbotron"
+    .container
+      .row
+        .col-md-8
+          p Здесь вы можете узнать свое расписание, либо расписание преподавателей БФ ПНИПУ
+          .btn-group role="group"
+            = link_to t('.groups'), { :controller => 'groups', :action => 'index' }, :class => 'btn btn-primary btn-lg'
+            = link_to t('.teachers'), { :controller => 'teachers', :action => 'index' }, :class => 'btn btn-primary btn-lg'
+        .col-md-4
+          p Войти на сайт
+          = link_to t('.vk'), '/auth/vkontakte', :class => 'btn btn-primary btn-lg'

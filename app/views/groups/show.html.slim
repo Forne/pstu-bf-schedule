@@ -1,6 +1,5 @@
 - title t('.title', :group => @group.name)
 - description t('.description', :group => @group.name)
-- manifest true
 
 .page-header
   h3
@@ -10,30 +9,7 @@
       | &nbsp;
       span class="label label-warning" = t('.archive_notification')
 
-- if @schedule.any?
-  - @schedule.group_by(&:group_by_date).each do |key, value|
-    .panel class=(key.to_date == Date.today ? 'panel-primary' : 'panel-info')
-      .panel-heading
-        = l(key.to_date, :format => '%A, %e %b %Y')
-        |  (#{ t('.pair', :count => value.count) })
-      table class="table"
-        tbody
-        - value.each do |entity|
-          tr class=(entity.entity_type.important ? 'warning' : '')
-            td style="width:10%;"
-              | #{ entity.start.strftime('%k:%M') } - #{ entity.end.strftime('%k:%M') }
-            td style="width:35%;"
-              = entity.subject.name
-              - if entity.entity_type.present?
-                - if entity.entity_type.name.present?
-                  |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
-            td style="width:10%;"
-              - if entity.auditorium
-                = entity.auditorium.name
-            td style="width:35%;"
-              = link_to entity.teacher.full_name, teacher_path(entity.teacher)
-- else
-  .alert.alert-info Расписание отсутствует!
+= render '_shared/schedule'
 
 hr
 

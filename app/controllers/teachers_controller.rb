@@ -12,6 +12,7 @@ class TeachersController < ApplicationController
       @to = Date.today+10.days
     end
     @teacher = Teacher.find(params[:id])
+    @schedule_view = 'group'
     @schedule = Entity.eager_load(:group, :subject, :auditorium, :entity_type).where(teacher_id: @teacher, start: @from..@to).order(:start)
   end
 end
