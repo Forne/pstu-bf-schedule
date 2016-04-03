@@ -8,6 +8,7 @@ class PagesController < ApplicationController
         @user = User.where(:vk_id => params[:viewer_id]).first_or_create(:first_name => vk_user['first_name'], :last_name => vk_user['last_name'], :sex => vk_user['sex'])
         # TODO: update user info
         session[:user_id] = @user.id
+        session[:user_ls] = 'vk'
         redirect_to :controller => 'pages', :action => 'start'
       else
         flash[:notice] = 'Ошибка API Вконтакте: Проверка не удалась.'
@@ -25,6 +26,7 @@ class PagesController < ApplicationController
       @user = User.where(:vk_id => auth_hash['uid']).first_or_create(:first_name => vk_user['first_name'], :last_name => vk_user['last_name'], :sex => auth_hash['extra']['raw_info']['sex'])
       #flash[:notice] = vk_user['first_name'] + vk_user['last_name'] + auth_hash['extra']['raw_info']['sex'].to_s
       session[:user_id] = @user.id
+      session[:user_ls] = 'web'
       redirect_to :controller => 'pages', :action => 'start'
     else
       flash[:notice] = 'Что-то пошло не так! :('
@@ -44,6 +46,7 @@ class PagesController < ApplicationController
 
   def logout
     session[:user_id] = nil
+    session[:user_ls] = nil
     redirect_to :controller => 'pages', :action => 'start'
   end
 

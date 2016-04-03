@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  before_action :set_env, :set_locale
+  before_action :set_env, :set_locale, :set_user_ls
 
   private
   def set_env
@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
   def set_user
     if session[:user_id]
       @user = User.find(session[:user_id])
+    end
+  end
+
+  def set_user_ls
+    if session[:user_ls]
+      @user_ls = session[:user_ls]
+    else
+      @user_ls = ''
     end
   end
 
