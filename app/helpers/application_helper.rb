@@ -29,6 +29,8 @@ module ApplicationHelper
                   'Добрый вечер'
                 when night..morning
                   'Приветствую'
+                else
+                  'Приветствую'
               end
     render :text => message
   end
