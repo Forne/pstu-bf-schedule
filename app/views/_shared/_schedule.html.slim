@@ -1,6 +1,6 @@
 - if @schedule.present?
   - @schedule.group_by(&:group_by_date).each do |key, value|
-    .panel class=(key.to_date == Date.today ? 'panel-primary' : 'panel-info')
+    .panel class=(key.to_date == Date.today && !@offline ? 'panel-primary' : 'panel-info')
       .panel-heading
         = l(key.to_date, :format => '%A, %e %b %Y')
         |  (#{ t('.pair', :count => value.count) })

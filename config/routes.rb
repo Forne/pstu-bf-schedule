@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'pages#callback'
   get 'logout', to: 'pages#logout'
 
+  get 'offline', to: 'pages#offline'
+  get 'sw', to: 'js#sw'
+
   get 'user/edit'
   put 'user/update'
 end

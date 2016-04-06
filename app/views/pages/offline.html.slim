@@ -1,0 +1,18 @@
+- title t('.title')
+- description t('.description')
+
+- if @user
+  .page-header
+    h3 = t('.hello', :great => greet, :name => @user.first_name)
+  - if @user.group_id
+    div
+      .alert.alert-warning = t('.offline_sc')
+      = render '_shared/schedule'
+  - else
+    div
+      .alert.alert-warning = t('.offline_na')
+- else
+  .page-header
+    h1 Ошибка
+  div
+    .alert.alert-warning = t('.offline_na')

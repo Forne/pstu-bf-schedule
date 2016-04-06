@@ -44,6 +44,21 @@ class PagesController < ApplicationController
     end
   end
 
+  def offline
+    @offline = true
+    if params[:u]
+      @user = User.find(params[:u])
+    end
+    if @user
+      if @user.group_id
+        @from = Date.today
+        @to = Date.today+30.days
+        @schedule = Entity.eager_load(:teacher, :subject, :auditorium, :entity_type).where(group_id: @user.group_id, start: @from..@to).order(:start)
+      end
+    end
+    render 'offline', :layout => 'offline'
+  end
+
   def logout
     session[:user_id] = nil
     session[:user_ls] = nil

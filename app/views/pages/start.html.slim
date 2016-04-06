@@ -6,7 +6,6 @@
     h3 = t('.hello', :great => greet, :name => @user.first_name)
   - if @user.group_id
     div
-      //.alert.alert-info = t('.schedule', :group => @user.group.name)
       = render '_shared/schedule'
   - else
     div
