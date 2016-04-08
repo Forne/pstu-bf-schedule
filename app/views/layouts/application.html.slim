@@ -79,7 +79,7 @@ html lang="ru"
     - if @user_ls != 'vk'
       - if @signed_in
         | <script>if ('serviceWorker' in navigator) {
-              navigator.serviceWorker.register('/sw.js?4').then(function(reg) {
+              navigator.serviceWorker.register('/sw.js?8').then(function(reg) {
                   //console.log('Registration succeeded. Scope is ' + reg.scope);
               }).catch(function(error) {
                   console.log('Registration failed with ' + error);
@@ -87,7 +87,7 @@ html lang="ru"
           };</script>
       - else
         | <script>if ('serviceWorker' in navigator) {
-                      navigator.serviceWorker.register('/sw.js?4u').then(function(reg) {
+                      navigator.serviceWorker.register('/sw.js?8').then(function(reg) {
                           //console.log('Registration succeeded. Scope is ' + reg.scope);
                       }).catch(function(error) {
                           console.log('Registration failed with ' + error);
