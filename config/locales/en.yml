@@ -1,7 +1,8 @@
 en:
+ title: BF PNIPU Schedule
  layouts:
    application:
-     description: BF PSTU Schedule
+     description: BF PNIPU Schedule
      keywords: schedule, university, pgtu, pnipu, bf, berezniki branch
      menu:
        schedule: Schedule
@@ -9,7 +10,7 @@ en:
        teachers: Teachers
        settings: Setting
        app: VK App
-       yet: Вы
+       yet: You
        settings: Settings
        logout: Logout
  greeting:
@@ -19,7 +20,7 @@ en:
    welcome: Hi
  _shared:
    schedule:
-     today: Сегодня
+     today: Today
      pair:
        one: 1 pair
        other: '%{count} pairs'
