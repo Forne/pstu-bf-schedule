@@ -14,12 +14,12 @@ module ApplicationHelper
   end
 
   def greet
-    time = Time.now.in_time_zone('Ekaterinburg')
-    today = Date.today.in_time_zone('Ekaterinburg').to_time
-    morning = today.beginning_of_day
-    noon = today.noon
-    evening = today.change( hour: 18 )
-    night = today.change( hour: 0 )
+    time = Time.now.in_time_zone('Ekaterinburg').to_i
+    today = Date.today.in_time_zone('Ekaterinburg')
+    morning = today.beginning_of_day.to_i
+    noon = today.noon.to_i
+    evening = today.change( hour: 18 ).to_i
+    night = today.change( hour: 0 ).to_i
     message = case time
                 when morning..noon
                   t('greeting.good_morning')
