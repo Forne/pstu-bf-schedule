@@ -14,23 +14,23 @@ module ApplicationHelper
   end
 
   def greet
-    time = Time.now.in_time_zone('Asia/Yekaterinburg')
-    today = Date.today.in_time_zone('Asia/Yekaterinburg').to_time
+    time = Time.now.in_time_zone('Ekaterinburg')
+    today = Date.today.in_time_zone('Ekaterinburg').to_time
     morning = today.beginning_of_day
     noon = today.noon
     evening = today.change( hour: 18 )
     night = today.change( hour: 0 )
     message = case time
                 when morning..noon
-                  'Доброе утро'
+                  t('greeting.good_morning')
                 when noon..evening
-                  'Добрый день'
+                  t('greeting.good_day')
                 when evening..night
-                  'Добрый вечер'
+                  t('greeting.good_evening')
                 when night..morning
-                  'Приветствую'
+                  t('greeting.welcome')
                 else
-                  'Приветствую'
+                  t('greeting.welcome')
               end
     render :text => message
   end

@@ -9,6 +9,36 @@ en:
        teachers: Teachers
        settings: Setting
        app: VK App
+       yet: Вы
+       settings: Settings
+       logout: Logout
+ greeting:
+   good_morning: Good morning
+   good_day: Good day
+   good_evening: Good evening
+   welcome: Hi
+ _shared:
+   schedule:
+     today: Сегодня
+     pair:
+       one: 1 pair
+       other: '%{count} pairs'
+ pages:
+   start:
+     title: Start page
+     description: Here you can learn about your schedule or of teachers BF PNIPU.
+     hello_guest: Welcome!
+     hello: '%{great}, %{name}!'
+     groups: Groups
+     teachers: Teachers
+     login: Sign in
+     vk: VK
+   offline:
+     title: Offline
+     description: Здесь вы можете узнать свое расписание, либо расписание преподавателей БФ ПНИПУ.
+     hello: 'Приветствую, %{name}!'
+     offline_sc: Онлайн расписание не доступно, скорее всего у вас отсутствует интернет подключение.
+     offline_na: Расписание не доступно, скорее всего у вас отсутствует интернет подключение.
  groups:
    index:
      title: List of groups
@@ -19,30 +49,26 @@ en:
        other: '%{count} groups'
    show:
      title: 'Schedule for %{group}'
-     description: 'Просмотр расписания занятий группы %{group} БФ ПНИПУ.'
+     description: 'View timetable of %{group} in BF PNIPU.'
      subtitle: ' from %{from} to %{to}'
      stat: Statistics
      syncago: 'Schedule sync %{sync} ago.'
-     today: Today
      archive_notification: Information of this group is not updated!
-     pair:
-       one: 1 pair
-       other: '%{count} pairs'
  teachers:
    index:
      title: List of teachers
-     description: Просмотр списка преподавателей БФ ПНИПУ и их расписание занятий.
+     description: View the list of Teachers BF PNIPU and their timetable.
      teacher:
        one: 1 teacher
        other: '%{count} teachers'
    show:
      title: 'Schedule for %{teacher}'
-     description: 'Просмотр расписания занятий %{teacher} в БФ ПНИПУ.'
+     description: 'View timetable %{teacher} in BF PNIPU.'
      subtitle: ' from %{from} to %{to}'
-     today: Today
-     pair:
-       one: 1 pair
-       other: '%{count} pairs'
  user:
    edit:
      title: Change settings
+ users:
+   index:
+     title: 'Students of %{group}'
+     header: Students
