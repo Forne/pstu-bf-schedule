@@ -1,0 +1,9 @@
+- title t('.title', :auditorium => @auditorium.name)
+- description t('.description', :auditorium =>  @auditorium.name)
+
+.page-header
+  h3
+    = t('.title', :auditorium => @auditorium.name)
+    small = t('.subtitle', :from => l(@from, :format => :long), :to => l(@to, :format => :long))
+
+= render '_shared/schedule'

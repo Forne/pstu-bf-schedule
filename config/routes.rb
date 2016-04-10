@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
   end
   resources :teachers, only: [:index, :show]
+  resources :auditoriums, only: [:index, :show]
 
   get 'start', to: 'pages#start'
   get 'vk_init', to: 'pages#vk_init'

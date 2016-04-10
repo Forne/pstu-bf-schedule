@@ -15,9 +15,14 @@
               - if entity.entity_type.present?
                 - if entity.entity_type.name.present?
                   |  (<abbr title="#{ entity.entity_type.name }">#{ entity.entity_type.shot_name }</abbr>)
-            td style="width:10%;"
-              - if entity.auditorium
-                = entity.auditorium.name
+            - if @schedule_view == 'aud'
+              td style="width:10%;"
+                - if entity.auditorium
+                  = link_to entity.group.name, group_path(entity.group)
+            - else
+              td style="width:10%;"
+                - if entity.auditorium
+                  = link_to entity.auditorium.name, auditorium_path(entity.auditorium)
             - if @schedule_view == 'group'
               td style="width:35%;"
                 = link_to entity.group.name, group_path(entity.group)

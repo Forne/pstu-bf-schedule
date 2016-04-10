@@ -74,6 +74,14 @@ ru:
       title: 'Расписание %{teacher}'
       description: 'Просмотр расписания занятий %{teacher} в БФ ПНИПУ.'
       subtitle: ' с %{from} по %{to}'
+  auditoriums:
+    index:
+      title: Список аудиторий
+      description: Просмотр списка аудиторий БФ ПНИПУ и их расписание занятий.
+    show:
+      title: 'Занятия в %{auditorium}'
+      description: 'Просмотр расписания занятий %{auditorium} в БФ ПНИПУ.'
+      subtitle: ' с %{from} по %{to}'
   user:
     edit:
       title: Изменение настроек

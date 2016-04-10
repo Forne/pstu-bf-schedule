@@ -1,0 +1,10 @@
+- title t('.title')
+- description t('.description')
+
+.page-header
+  h3 = t('.title')
+
+.panel.panel-info
+  ul.list-group
+    - @auditoriums.each do |value|
+      li.list-group-item= link_to value.name, auditorium_path(value)
