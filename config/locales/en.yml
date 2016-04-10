@@ -27,7 +27,7 @@ en:
  pages:
    start:
      title: Start page
-     description: Here you can learn about your schedule or of teachers BF PNIPU.
+     description: Here you can see your schedule or schedule of teachers BF PNIPU.
      hello_guest: Welcome!
      hello: '%{great}, %{name}!'
      groups: Groups
@@ -43,7 +43,7 @@ en:
  groups:
    index:
      title: List of groups
-     description: Просмотр списка учебных групп БФ ПНИПУ и их расписание занятий.
+     description: View the list of groups BF PNIPU and their timetable.
      group_header: '%{key} year (%{count})'
      group:
        one: 1 group
