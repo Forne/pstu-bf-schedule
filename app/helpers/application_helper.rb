@@ -16,19 +16,20 @@ module ApplicationHelper
   def greet
     time = Time.now.in_time_zone('Ekaterinburg').to_i
     today = Date.today.in_time_zone('Ekaterinburg')
-    morning = today.beginning_of_day.to_i
+    start = today.beginning_of_day.to_i
+    morning = today.change( hour: 6 ).to_i
     noon = today.noon.to_i
     evening = today.change( hour: 18 ).to_i
-    night = today.change( hour: 0 ).to_i
+    night = today.tomorrow().change( hour: 0 ).to_i
     message = case time
+                when start..morning
+                  t('greeting.welcome')
                 when morning..noon
                   t('greeting.good_morning')
                 when noon..evening
                   t('greeting.good_day')
                 when evening..night
                   t('greeting.good_evening')
-                when night..morning
-                  t('greeting.welcome')
                 else
                   t('greeting.welcome')
               end
