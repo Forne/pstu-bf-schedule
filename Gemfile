@@ -10,6 +10,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jbuilder'
 gem 'slim-rails'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'petrovich', '~> 0.2.1'
 gem 'whenever'
@@ -19,6 +20,7 @@ gem 'omniauth-vkontakte'
 
 group :production do
   gem 'newrelic_rpm'
+  gem 'puma'
 end
 
 group :development, :test do
