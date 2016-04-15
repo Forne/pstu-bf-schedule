@@ -89,3 +89,6 @@ html lang="ru"
             VK.callMethod("resizeWindow", 795, $('body').height() + 40);
         }, function () {
         }, '5.5');
+  javascript:
+    ga('set', 'location', location.href.split('#')[0]);
+    ga('send', 'pageview', { "title": document.title });
