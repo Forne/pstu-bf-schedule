@@ -16,13 +16,17 @@ class ApplicationController < ActionController::Base
 
   def set_user
     if session[:user_id]
-      @user = User.find(session[:user_id])
+      @user = User.where(:id => session[:user_id]).first
+      if @user.blank?
+        session[:user_id] = nil
+        cookies[:user_ls] = nil
+      end
     end
   end
 
   def set_user_ls
-    if session[:user_ls]
-      @user_ls = session[:user_ls]
+    if cookies[:user_ls]
+      @user_ls = cookies[:user_ls]
     else
       @user_ls = ''
     end

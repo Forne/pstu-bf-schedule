@@ -1,3 +1,8 @@
+self.addEventListener('install', function (event) {
+  self.skipWaiting();
+});
+
+/*
 var OFFLINE_PAGE = '<%= @offline_page.html_safe %>';
 
 var CACHE_VERSION = '<%= DateTime.now.strftime("%Y%m%d") %>';
@@ -74,7 +79,6 @@ self.addEventListener('activate', function (event) {
   );
 });
 
-/*
 self.addEventListener('fetch', function (event) {
   console.log('Handling fetch event for', event.request.url);
 

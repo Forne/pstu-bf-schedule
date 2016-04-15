@@ -1,29 +1,26 @@
-FROM phusion/passenger-full
+FROM ruby:2.2
 MAINTAINER Dmitriy Pervin "theforner@gmail.com"
+
+RUN apt-get update && apt-get install -y \
+    nodejs cron \
+ && rm -rf /var/lib/apt/lists/*
 
 # Set correct environments.
 ENV HOME /root
-CMD ["/sbin/my_init"]
-RUN rm -f /etc/service/nginx/down
-RUN ruby-switch --set ruby2.2
-
-# Config nginx
-RUN rm /etc/nginx/sites-enabled/default
-ADD config/docker/nginx_env.conf /etc/nginx/main.d/env.conf
-ADD config/docker/nginx_server.conf /etc/nginx/sites-enabled/server.conf
 
 # Prepare folders
-RUN mkdir /home/app/webapp
+RUN mkdir /home/schedule
 
 # Run Bundle
-WORKDIR /home/app/webapp
+WORKDIR /home/schedule
 ADD Gemfile ./
 ADD Gemfile.lock ./
-RUN bundle install
+RUN bundle config build.nokogiri --use-system-libraries && \
+    bundle install --jobs 20 --retry 5 --path vendor/bundle
 
 # Add app
 ADD ./ ./
-RUN chown -R app:app ./tmp ./log
+RUN cp config/secrets.yml.example config/secrets.yml && cp config/database.yml.example config/database.yml
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 # Schedule gem init

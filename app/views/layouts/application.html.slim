@@ -33,7 +33,9 @@ html lang="ru"
     - if yield(:description).present?
       meta name="description" content = yield(:description)
       meta property="og:description" content = yield(:description)
-    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    = render '_shared/google_analytics'
     = csrf_meta_tags
 
   body
@@ -67,44 +69,23 @@ html lang="ru"
         .alert.alert-info= flash[:notice]
       = yield
 
-    hr
-
-    footer
-      p.text-center
-        | Created by <a href="http://vk.com/forne">Forne</a>
-
-    = javascript_include_tag 'application'
     - if @user_ls != 'vk'
-      - if @signed_in
-        | <script>if ('serviceWorker' in navigator) {
-              navigator.serviceWorker.register('/sw.js?8').then(function(reg) {
-                  //console.log('Registration succeeded. Scope is ' + reg.scope);
-              }).catch(function(error) {
-                  console.log('Registration failed with ' + error);
-              });
-          };</script>
-      - else
-        | <script>if ('serviceWorker' in navigator) {
-                      navigator.serviceWorker.register('/sw.js?8').then(function(reg) {
-                          //console.log('Registration succeeded. Scope is ' + reg.scope);
-                      }).catch(function(error) {
-                          console.log('Registration failed with ' + error);
-                      });
-                  };</script>
+      hr
+      footer
+        p.text-center
+          | Created by <a target="_blank" href="http://vk.com/forne">Forne</a>
+      javascript:
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js?9').then(function (reg) {
+          }).catch(function (error) {
+            console.log('Registration failed with ' + error);
+          });
+        };
+
     - if @user_ls == 'vk'
       = javascript_include_tag 'xd_connection'
-      | <script>
-            VK.init(function () {
-                VK.callMethod("resizeWindow", 800, $('body').height() + 100);
-            }, function () {
-            }, '5.3');
-        </script>
-    | <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-45614097-1', 'cravs.com');
-        ga('require', 'displayfeatures');
-        ga('send', 'pageview');
-      </script>
+      javascript:
+        VK.init(function () {
+            VK.callMethod("resizeWindow", 795, $('body').height() + 40);
+        }, function () {
+        }, '5.5');

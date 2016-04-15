@@ -17,3 +17,5 @@
 /tmp
 
 /config/newrelic.yml
+/config/database.yml
+/config/secrets.yml

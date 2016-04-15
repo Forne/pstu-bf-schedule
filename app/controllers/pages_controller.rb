@@ -3,12 +3,12 @@ class PagesController < ApplicationController
 
   def vk_init
     if params.has_key?(:auth_key)
-      if (Digest::MD5.hexdigest('3893502_' + params[:viewer_id] + '_09zerWjvcxQN49H87GOC')) == params[:auth_key]
+      if (Digest::MD5.hexdigest(Rails.application.secrets.vk_app_key + '_' + params[:viewer_id] + '_' + Rails.application.secrets.vk_app_secret)) == params[:auth_key]
         vk_user = JSON.parse(params[:api_result])['response'][0]
         @user = User.where(:vk_id => params[:viewer_id]).first_or_create(:first_name => vk_user['first_name'], :last_name => vk_user['last_name'], :sex => vk_user['sex'])
         # TODO: update user info
         session[:user_id] = @user.id
-        session[:user_ls] = 'vk'
+        cookies[:user_ls] = 'vk'
         redirect_to :controller => 'pages', :action => 'start'
       else
         flash[:notice] = 'Ошибка API Вконтакте: Проверка не удалась.'
@@ -26,7 +26,7 @@ class PagesController < ApplicationController
       @user = User.where(:vk_id => auth_hash['uid']).first_or_create(:first_name => vk_user['first_name'], :last_name => vk_user['last_name'], :sex => auth_hash['extra']['raw_info']['sex'])
       #flash[:notice] = vk_user['first_name'] + vk_user['last_name'] + auth_hash['extra']['raw_info']['sex'].to_s
       session[:user_id] = @user.id
-      session[:user_ls] = 'web'
+      cookies[:user_ls] = 'web'
       redirect_to :controller => 'pages', :action => 'start'
     else
       flash[:notice] = 'Что-то пошло не так! :('
