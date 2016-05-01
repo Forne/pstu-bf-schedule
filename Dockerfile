@@ -26,4 +26,4 @@ RUN RAILS_ENV=production bundle exec rake assets:precompile
 # Schedule gem init
 RUN bundle exec whenever --update-crontab schedule
 
-RUN git log -1 --pretty=format:"build: %h (%cd)" --date="short" > app/views/_shared/build.html.erb
+RUN git log -1 --pretty=format:"build: %h (%cd)" --date="short" > app/views/_shared/_build.html.erb
