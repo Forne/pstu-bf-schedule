@@ -72,14 +72,13 @@ html lang="ru"
     hr
     footer
       p.text-center
-        - if @user_ls != 'vk'
-          | Created by <a target="_blank" href="http://vk.com/forne">Forne</a>
-        - else
+        - if @user_ls == 'vk'
           | Расписание БФ ПНИПУ
+        - else
+          | Created by <a target="_blank" href="http://vk.com/forne">Forne</a>
         br
         small
           = render '_shared/build'
-
     - if @user_ls == 'vk'
       = javascript_include_tag 'xd_connection'
       javascript:
