@@ -59,7 +59,7 @@ html lang="ru"
                   b class="caret"
                 ul class="dropdown-menu"
                   li = link_to t('.menu.settings'), { :controller => 'user', :action => 'edit' }
-                  - if @user_ls == 'web'
+                  - if @user_ls != 'vk'
                     li = link_to t('.menu.logout'), { :controller => 'pages', :action => 'logout' }
             - else
               li = link_to t('.menu.app'), 'http://vk.com/app3893502', :target => '_blank'
@@ -69,18 +69,21 @@ html lang="ru"
         .alert.alert-info= flash[:notice]
       = yield
 
-    - if @user_ls != 'vk'
-      hr
-      footer
-        p.text-center
+    hr
+    footer
+      p.text-center
+        - if @user_ls != 'vk'
           | Created by <a target="_blank" href="http://vk.com/forne">Forne</a>
-      javascript:
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/sw.js?9').then(function (reg) {
-          }).catch(function (error) {
-            console.log('Registration failed with ' + error);
-          });
-        };
+          javascript:
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('/sw.js?9').then(function (reg) {
+              }).catch(function (error) {
+                console.log('Registration failed with ' + error);
+              });
+            };
+        br
+        small
+          = render '_shared/build'
 
     - if @user_ls == 'vk'
       = javascript_include_tag 'xd_connection'
