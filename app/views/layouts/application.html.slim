@@ -34,7 +34,10 @@ html lang="ru"
       meta name="description" content = yield(:description)
       meta property="og:description" content = yield(:description)
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    - if Rails.env == 'production'
+      = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload', async: true
+    - else
+      = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     = render '_shared/google_analytics'
     = csrf_meta_tags
 
@@ -85,11 +88,11 @@ html lang="ru"
         VK.init(function () {
             VK.callMethod("resizeWindow", 795, $('body').height() + 40);
         }, function () { }, '5.5');
-  javascript:
-    ga('set', 'location', location.href.split('#')[0]);
-    ga('send', 'pageview', { "title": document.title });
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js?9').then(function () {}).catch(function (error) {
-        console.log('Registration failed with ' + error);
-      });
-    };
+    javascript:
+      ga('set', 'location', location.href.split('#')[0]);
+      ga('send', 'pageview', { "title": document.title });
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js?9').then(function () {}).catch(function (error) {
+          console.log('Registration failed with ' + error);
+        });
+      };
