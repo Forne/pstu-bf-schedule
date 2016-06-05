@@ -16,7 +16,7 @@ WORKDIR /home/schedule
 ADD Gemfile ./
 ADD Gemfile.lock ./
 RUN bundle config build.nokogiri --use-system-libraries && \
-    bundle install --jobs 20 --retry 5 --path vendor/bundle
+    bundle install --jobs 20 --retry 5 --without development test --path vendor/bundle
 
 # Add app
 ADD ./ ./
@@ -24,6 +24,7 @@ RUN cp config/secrets.yml.example config/secrets.yml && cp config/database.yml.e
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 # Schedule gem init
-RUN bundle exec whenever --update-crontab schedule && systemctl enable cron
+RUN bundle exec whenever --update-crontab schedule
+RUN systemctl enable cron
 
 RUN git log -1 --pretty=format:"build: %h (%cd)" --date="short" > app/views/_shared/_build.html.erb

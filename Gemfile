@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.0.beta4'
+gem 'rails', '~> 5.0.0.rc1'
 
 gem 'pg'
 
@@ -12,7 +12,7 @@ gem 'jbuilder'
 gem 'slim-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 
-gem 'turbolinks', '~> 5.0.0.beta'
+gem 'turbolinks', '~> 5.0.0.beta2'
 gem 'petrovich', '~> 0.2.1'
 gem 'whenever'
 gem 'sitemap_generator'
