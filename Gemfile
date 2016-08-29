@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.0.rc1'
+gem 'rails', '~> 5.0.0.1'
 
 gem 'pg'
 
@@ -10,9 +10,9 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jbuilder'
 gem 'slim-rails'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.3.7'
 
-gem 'turbolinks', '~> 5.0.0.beta2'
+gem 'turbolinks', '~> 5.0.1'
 gem 'petrovich', '~> 0.2.1'
 gem 'whenever'
 gem 'sitemap_generator'
@@ -31,7 +31,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

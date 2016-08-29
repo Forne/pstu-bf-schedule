@@ -5,12 +5,9 @@ default: &default
 
 development:
   <<: *default
-  url: postgresql://schedule:mBeu0Fd9LQ@localhost/schedule_production
 
 test:
   <<: *default
-  database: schedule_test
 
 production:
   <<: *default
-  url: postgresql://schedule:mBeu0Fd9LQ@localhost/schedule_production
