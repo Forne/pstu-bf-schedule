@@ -1,4 +1,4 @@
-json.extract! @group, :id, :name, :updated_at
+json.extract! @teacher, :id, :full_name, :updated_at
 json.from @from
 json.to @to
 json.schedule @schedule do |event|
