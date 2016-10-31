@@ -7,6 +7,7 @@ module ApplicationHelper
       content_for :page_title, t('title')
       content_for :og_title, t('title')
     end
+    content_for :og_image, 'http://i.cravs.com/image/?u=' + request.original_url
   end
 
   def description(page_description)
