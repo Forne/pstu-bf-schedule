@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /api
+Sitemap: https://schedule.cravs.com/sitemap.xml.gz
+Host: https://schedule.cravs.com
